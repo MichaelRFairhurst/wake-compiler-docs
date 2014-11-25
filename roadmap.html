@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Wake The Language</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<!-- Bootstrap -->
+		<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+		<link rel="stylesheet" href="/highlight.js/styles/tomorrow.css">
+		<script src="/highlight.js/highlight.pack.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+		<script type="text/javascript" src="page.js"></script>
+		<link rel="stylesheet" type="text/css" href="page.css">
+		<link href='http://fonts.googleapis.com/css?family=Roboto:100' rel='stylesheet' type='text/css'>
+	</head>
+	<body>
+		<div class="mynavbar">
+			<ul class="nav nav-tabs nav-stacked">
+				<li><a href="index.html">Wake Home</a></li>
+				<li><a href="howto.html">Quick Tutorial</a></li>
+				<li><a href="installing.html">Installing</a></li>
+				<li><a href="faq.html">FAQ</a></li>
+				<li><a href="std.html">Standard Library</a></li>
+				<li><a href="TryWake.php">Online Compiler</a></li>
+				<li><a href="contributing.html">Wake Developer Guide</a></li>
+				<li><a href="changelog.html">Changelog</a></li>
+			</ul>
+			<hr />
+			<ul class="nav nav-tabs nav-stacked">
+				<li><a href="#typetags">Type Tags</a></li>
+				<!--<li><a href="#jsinterop">Something Else</a></li>-->
+			</ul>
+		</div>
+		<div class="opennav"><button class="btn btn-inverse btn-small"><i class="icon-align-justify icon-white"></i></button></div>
+		<div class="content" data-spy="scroll" data-target=".mynavbar">
+			<div class="inner-content">
+			<div id="intro">
+				<div id="logo">
+				</div>
+				<h2><a class="logo-label" href="/">WAKE</a></h2>
+				<p class="logo-label-label">
+				a <span class="accent">fast</span>, <span class="accent">expressive</span>, <span class="accent">typesafe</span> language that gives you <span class="accent">testability from the ground up</span>.
+				</p>
+			</div>
+
+			<style>
+				.rm-c {
+					width: 33%;
+					float: left;
+				}
+
+				.rm-i {
+					border: 16px solid #c6edff; #73d0ef;
+					min-height: 200px;
+					border-radius: 8px;
+					margin: 20px;
+					background: white;
+					padding: 16px;
+					overflow: auto;
+					box-shadow: 1px 1px 30px #f0f0f0;
+				}
+
+				.rm-slant-left {
+					border: 8px solid #c6edff;
+					height: 0;
+					margin-left: -87px;
+					margin-top: -103px;
+					transform: rotate(108deg);
+					width: 158px;
+					float: left;
+				}
+
+				.rm-slant-right {
+					border: 8px solid #c6edff;
+					float: right;
+					height: 0;
+					margin-right: -87px;
+					margin-top: -103px;
+					transform: rotate(252deg);
+					width: 158px;
+				}
+
+				.rm-slant-straight {
+					border: 8px solid #c6edff;
+					float: left;
+					height: 0;
+					margin-left: 44%;
+					margin-top: -19px;
+					transform: rotate(90deg);
+					width: 32px;
+				}
+
+				.rm-primary {
+					border-color: #73d0ef;
+					z-index: 10;
+					position: relative;
+				}
+
+				.rm-spacer {
+					height: 132px;
+					margin: 20px;
+				}
+
+			</style>
+
+			<h1>Wake Development Roadmap</h1>
+			<p>There are many interdependent features, and high target goals. The relationships are expressed here, each in their own section, with high importance items bordered in darker blue.</p>
+			<br />
+
+			<h3 id="typetags">1. Type Tags</h3>
+			<p>Type tags might prove to be a flagship feature of Wake, but to do them right and/or get their whole benefit involves several moving parts.</p>
+
+			<div class="clearfix">
+				<div class="rm-c rm-c1">
+					<div class="rm-i">
+						<h4>Parameterized Ranges</h4>
+						<p>Declaring generic classes with restrictions on their parameterized types, ie, <code>Cone{T from Icecream}</code>.</p>
+						<p>Incredibly useful for generic programming, and should be available for std lib development/design.</p>
+					</div>
+					<div class="rm-slant-straight"></div>
+					<div class="rm-i">
+						<h4>Self Type</h4>
+						<p>A special generic a type that represents <code>this</code>. Extending the class, <code>self</code> becomes the extension.</p>
+					</div>
+					<div class="rm-slant-right"></div>
+				</div>
+
+				<div class="rm-c rm-c2">
+					<div class="rm-spacer"></div>
+					<div class="rm-i rm-primary">
+						<h4>Type Tags</h4>
+						<p>A freeform typechecked label for distinguishing types with the compiler's help. Example: keeping Num:miles and Num:kilometers apart.</p>
+					</div>
+					<div class="rm-slant-straight"></div>
+					<div class="rm-i">
+						<h4>Typesafe Autoboxing</h4>
+						<p>The standard library will now be able to have methods such as <code>Self -- maxOf(Self)</code></p>
+					</div>
+				</div>
+
+				<div class="rm-c rm-c3">
+					<div class="rm-i">
+						<h4>Service Extensions</h4>
+						<p>Classes that add methods to other classes when in scope. This is nice for extending the std library, or other libraries, and can lead to cleaner tests to boot.</p>
+					</div>
+					<div class="rm-slant-straight"></div>
+					<div class="rm-i rm-primary">
+						<h4>Operator overloading</h4>
+						<p>Instead of adding methods to other classes, they create operator overloading. Combined with type tags, this can be used to automatically convert units on arithmatic/assignment.</p>
+					</div>
+					<div class="rm-slant-left"></div>
+				</div>
+			</div>
+
+			<h3 id="jsinterop">More of these graphs on the way :)</h3>
+			<!--
+			<h3 id="jsinterop">2. JS Interop</h3>
+			<p>Type tags might prove to be a flagship feature of Wake, but to do them right and/or get their whole benefit involves several moving parts.</p>
+
+			<div class="clearfix">
+				<div class="rm-c rm-c1">
+					<div class="rm-i">
+						<h4>Parameterized Ranges</h4>
+						<p>Declaring generic classes with restrictions on their parameterized types, ie, <code>Cone{T from Icecream}</code>.</p>
+						<p>Incredibly useful for generic programming, and should be available for std lib development/design.</p>
+					</div>
+					<div class="rm-slant-straight"></div>
+					<div class="rm-i rm-primary">
+						<h4>Self Type</h4>
+						<p>A special generic a type that represents <code>this</code>. Extending the class, <code>self</code> becomes the extension.</p>
+					</div>
+					<div class="rm-slant-right"></div>
+				</div>
+
+				<div class="rm-c rm-c2">
+					<div class="rm-spacer"></div>
+					<div class="rm-i rm-primary">
+						<h4>Type Tags</h4>
+						<p>A freeform typechecked label for distinguishing types with the compiler's help. Example: keeping Num:miles and Num:kilometers apart.</p>
+					</div>
+					<div class="rm-slant-straight"></div>
+					<div class="rm-i">
+						<h4>Typesafe Autoboxing</h4>
+						<p>The standard library will now be able to have methods such as <code>Self maxOf(Self)</code></p>
+					</div>
+				</div>
+
+				<div class="rm-c rm-c3">
+					<div class="rm-i">
+						<h4>Service Extensions</h4>
+						<p>Classes that add methods to other classes when in scope. This is nice for extending the std library, or other libraries, and can lead to cleaner tests to boot.</p>
+					</div>
+					<div class="rm-slant-straight"></div>
+					<div class="rm-i">
+						<h4>Operator overloading</h4>
+						<p>Instead of adding methods to other classes, they create operator overloading. Combined with type tags, this can be used to automatically convert units on arithmatic/assignment.</p>
+					</div>
+					<div class="rm-slant-left"></div>
+				</div>
+			</div>
+			-->
+
+		</div>
+		</div>
+
+		<script src="bootstrap/js/bootstrap.min.js"></script>
+	</body>
+</html>

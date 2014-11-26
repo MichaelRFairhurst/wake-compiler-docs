@@ -47,6 +47,8 @@
 				.rm-c {
 					width: 33%;
 					float: left;
+					padding-top: 25px;
+					padding-bottom: 25px;
 				}
 
 				.rm-i {
@@ -102,6 +104,15 @@
 					margin: 20px;
 				}
 
+				.rm-c h3 {
+					font-family: 'Roboto';
+					text-transform: uppercase;
+					text-align: center;
+					font-size: 16px;
+					color: #ccc;
+					margin-bottom: -25px;
+					margin-top: -25px;
+				}
 			</style>
 
 			<h1>Wake Development Roadmap</h1>
@@ -113,6 +124,7 @@
 
 			<div class="clearfix">
 				<div class="rm-c rm-c1">
+					<h3>ready to develop</h3>
 					<div class="rm-i">
 						<h4>Parameterized Ranges (<a href="https://github.com/MichaelRFairhurst/wake-compiler/issues/20">#20</a>)</h4>
 						<p>Declaring generic classes with restrictions on their parameterized types, ie, <code>Cone{T from Icecream}</code>.</p>
@@ -128,6 +140,7 @@
 
 				<div class="rm-c rm-c2">
 					<div class="rm-spacer"></div>
+					<h3>ready to develop</h3>
 					<div class="rm-i flagship">
 						<h4>Type Tags (<a href="https://github.com/MichaelRFairhurst/wake-compiler/issues/37">#37</a>)</h4>
 						<p>A freeform typechecked label for distinguishing types with the compiler's help. Example: keeping Num:miles and Num:kilometers apart.</p>
@@ -137,9 +150,11 @@
 						<h4>Typesafe Autoboxing</h4>
 						<p>The standard library will now be able to have methods such as <code>Self -- maxOf(Self)</code></p>
 					</div>
+					<h3>end</h3>
 				</div>
 
 				<div class="rm-c rm-c3">
+					<h3>ready to develop</h3>
 					<div class="rm-i">
 						<h4>Service Extensions (<a href="https://github.com/MichaelRFairhurst/wake-compiler/issues/78">#78</a>)</h4>
 						<p>Classes that add methods to other classes when in scope. This is nice for extending the std library, or other libraries, and can lead to cleaner tests to boot.</p>
@@ -159,6 +174,7 @@
 			<div class="clearfix">
 				<div class="rm-c rm-c1">
 					<div class="rm-spacer"></div>
+					<h3>ready to develop</h3>
 					<div class="rm-i">
 						<h4>Provision Annotations (<a href="https://github.com/MichaelRFairhurst/wake-compiler/issues/79">#79</a>)</h4>
 						<p>The ability to annotate provisions, so that you can annotate them with a javascript method name.</p>
@@ -177,6 +193,7 @@
 				</div>
 
 				<div class="rm-c rm-c2">
+					<h3>ready to develop</h3>
 					<div class="rm-i">
 						<h4>Cascade Annotations Across Inheritance (<a href="https://github.com/MichaelRFairhurst/wake-compiler/issues/80">#80</a>)</h4>
 						<p>By having annotations traverse inheritance chains, we can use <code>@JavascriptAvailable("methodName")</code> to publish wake-y APIs like providers and method overloading.</p>
@@ -198,10 +215,12 @@
 						<h4>Sweet website to demonstrate Wake</h4>
 						<p>Take a look at <a href="/breakdown.html">our proof-of-concept interactive wake explorer</a>, which really should be rewritten in Wake before we finish it and share it.</p>
 					</div>
+					<h3>end</h3>
 				</div>
 
 				<div class="rm-c rm-c3">
 					<div class="rm-spacer"></div>
+					<h3>ready to develop</h3>
 					<div class="rm-i">
 						<h4>Property Annotations (<a href="https://github.com/MichaelRFairhurst/wake-compiler/issues/81">#81</a>)</h4>
 						<p>The ability to annotate properties, so that you can choose a name for javascript for wierd properties like <code>Text[]</code>.</p>

@@ -27,7 +27,8 @@
 			<hr />
 			<ul class="nav nav-tabs nav-stacked">
 				<li><a href="#typetags">Type Tags</a></li>
-				<!--<li><a href="#jsinterop">Something Else</a></li>-->
+				<li><a href="#jsinterop">Javascript Interop</a></li>
+				<li><a href="#more">More soon!</a></li>
 			</ul>
 		</div>
 		<div class="opennav"><button class="btn btn-inverse btn-small"><i class="icon-align-justify icon-white"></i></button></div>
@@ -89,10 +90,11 @@
 					width: 32px;
 				}
 
-				.rm-primary {
+				.flagship {
 					border-color: #73d0ef;
 					z-index: 10;
 					position: relative;
+					box-shadow: none;
 				}
 
 				.rm-spacer {
@@ -112,7 +114,7 @@
 			<div class="clearfix">
 				<div class="rm-c rm-c1">
 					<div class="rm-i">
-						<h4>Parameterized Ranges</h4>
+						<h4>Parameterized Ranges (<a href="https://github.com/MichaelRFairhurst/wake-compiler/issues/20">#20</a>)</h4>
 						<p>Declaring generic classes with restrictions on their parameterized types, ie, <code>Cone{T from Icecream}</code>.</p>
 						<p>Incredibly useful for generic programming, and should be available for std lib development/design.</p>
 					</div>
@@ -126,8 +128,8 @@
 
 				<div class="rm-c rm-c2">
 					<div class="rm-spacer"></div>
-					<div class="rm-i rm-primary">
-						<h4>Type Tags</h4>
+					<div class="rm-i flagship">
+						<h4>Type Tags (<a href="https://github.com/MichaelRFairhurst/wake-compiler/issues/37">#37</a>)</h4>
 						<p>A freeform typechecked label for distinguishing types with the compiler's help. Example: keeping Num:miles and Num:kilometers apart.</p>
 					</div>
 					<div class="rm-slant-straight"></div>
@@ -139,11 +141,11 @@
 
 				<div class="rm-c rm-c3">
 					<div class="rm-i">
-						<h4>Service Extensions</h4>
+						<h4>Service Extensions (<a href="https://github.com/MichaelRFairhurst/wake-compiler/issues/78">#78</a>)</h4>
 						<p>Classes that add methods to other classes when in scope. This is nice for extending the std library, or other libraries, and can lead to cleaner tests to boot.</p>
 					</div>
 					<div class="rm-slant-straight"></div>
-					<div class="rm-i rm-primary">
+					<div class="rm-i flagship">
 						<h4>Operator overloading</h4>
 						<p>Instead of adding methods to other classes, they create operator overloading. Combined with type tags, this can be used to automatically convert units on arithmatic/assignment.</p>
 					</div>
@@ -151,53 +153,71 @@
 				</div>
 			</div>
 
-			<h3 id="jsinterop">More of these graphs on the way :)</h3>
-			<!--
 			<h3 id="jsinterop">2. JS Interop</h3>
-			<p>Type tags might prove to be a flagship feature of Wake, but to do them right and/or get their whole benefit involves several moving parts.</p>
+			<p>There are a lot af parts in Wake, and a lot of parts in JavaScript. Getting all of them to play nice on each side is starting to wrap up, but still not done yet.</p>
 
 			<div class="clearfix">
 				<div class="rm-c rm-c1">
+					<div class="rm-spacer"></div>
 					<div class="rm-i">
-						<h4>Parameterized Ranges</h4>
-						<p>Declaring generic classes with restrictions on their parameterized types, ie, <code>Cone{T from Icecream}</code>.</p>
-						<p>Incredibly useful for generic programming, and should be available for std lib development/design.</p>
+						<h4>Provision Annotations (<a href="https://github.com/MichaelRFairhurst/wake-compiler/issues/79">#79</a>)</h4>
+						<p>The ability to annotate provisions, so that you can annotate them with a javascript method name.</p>
 					</div>
-					<div class="rm-slant-straight"></div>
-					<div class="rm-i rm-primary">
-						<h4>Self Type</h4>
-						<p>A special generic a type that represents <code>this</code>. Extending the class, <code>self</code> becomes the extension.</p>
+					<div class="rm-slant-right"></div>
+					<div class="rm-i flagship">
+						<h4>Closure support</h4>
+						<p>Perhaps here we'll begin with only currying methods so that we can keep developing js interop. This is a broad feature with its own dependencies.</p>
+					</div>
+					<div class="rm-slant-right flagship"></div>
+					<div class="rm-i flagship">
+						<h4>Angular support</h4>
+						<p>I would love to support angularjs well.</p>
 					</div>
 					<div class="rm-slant-right"></div>
 				</div>
 
 				<div class="rm-c rm-c2">
-					<div class="rm-spacer"></div>
-					<div class="rm-i rm-primary">
-						<h4>Type Tags</h4>
-						<p>A freeform typechecked label for distinguishing types with the compiler's help. Example: keeping Num:miles and Num:kilometers apart.</p>
+					<div class="rm-i">
+						<h4>Cascade Annotations Across Inheritance (<a href="https://github.com/MichaelRFairhurst/wake-compiler/issues/80">#80</a>)</h4>
+						<p>By having annotations traverse inheritance chains, we can use <code>@JavascriptAvailable("methodName")</code> to publish wake-y APIs like providers and method overloading.</p>
 					</div>
 					<div class="rm-slant-straight"></div>
+					<div class="rm-i flagship">
+						<h4>Publish Wake classes to JS</h4>
+						<p>Use the annotation values and best guesses to create thin js wrappers that allow wake to be usable within your javascript.</p>
+						<p>Alter <code>wake-js-gen</code> to use this on all classes except extern ones which we might unwrap instead.</p>
+					</div>
+					<div class="rm-slant-straight flagship"></div>
+					<div class="rm-i flagship">
+						<h4>jQuery support</h4>
+						<p>Now with wrappers for the return value of <code>$(selector)</code> and <code>.offset()</code>, and with closures to pass into <code>.click()</code>, we can support jQuery. This will likely teach us some lessons about where we have holes in our interp support</p>
+					</div>
+					<div class="rm-slant-left flagship"></div>
+					<div class="rm-slant-straight"></div>
 					<div class="rm-i">
-						<h4>Typesafe Autoboxing</h4>
-						<p>The standard library will now be able to have methods such as <code>Self maxOf(Self)</code></p>
+						<h4>Sweet website to demonstrate Wake</h4>
+						<p>Take a look at <a href="/breakdown.html">our proof-of-concept interactive wake explorer</a>, which really should be rewritten in Wake before we finish it and share it.</p>
 					</div>
 				</div>
 
 				<div class="rm-c rm-c3">
+					<div class="rm-spacer"></div>
 					<div class="rm-i">
-						<h4>Service Extensions</h4>
-						<p>Classes that add methods to other classes when in scope. This is nice for extending the std library, or other libraries, and can lead to cleaner tests to boot.</p>
-					</div>
-					<div class="rm-slant-straight"></div>
-					<div class="rm-i">
-						<h4>Operator overloading</h4>
-						<p>Instead of adding methods to other classes, they create operator overloading. Combined with type tags, this can be used to automatically convert units on arithmatic/assignment.</p>
+						<h4>Property Annotations (<a href="https://github.com/MichaelRFairhurst/wake-compiler/issues/81">#81</a>)</h4>
+						<p>The ability to annotate properties, so that you can choose a name for javascript for wierd properties like <code>Text[]</code>.</p>
 					</div>
 					<div class="rm-slant-left"></div>
+					<div class="rm-i flagship">
+						<h4>Plan for Javascript Wrappers (<a href="https://github.com/MichaelRFairhurst/wake-compiler/issues/82">#82</a>)</h4>
+						<p>These are Wake layers around random objects such as the result of <code>$(selector)</code>. They must be declared in Wake to wrap the native object, and annotated with how to use it in js.</p>
+						<p>Alter <code>wake-js-gen</code> to use these to wrap return values of javascript methods.</p>
+					</div>
+					<div class="rm-slant-left flagship"></div>
 				</div>
 			</div>
-			-->
+
+			<h3 id="more">3. More roadmaps like these coming soon!</h3>
+			<p>Expect closures, typechecked annotations, and/or PHP+java+c next!</p>
 
 		</div>
 		</div>

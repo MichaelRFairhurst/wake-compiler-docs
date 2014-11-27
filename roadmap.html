@@ -28,6 +28,7 @@
 			<ul class="nav nav-tabs nav-stacked">
 				<li><a href="#typetags">Type Tags</a></li>
 				<li><a href="#jsinterop">Javascript Interop</a></li>
+				<li><a href="#closures">Closures</a></li>
 				<li><a href="#more">More soon!</a></li>
 			</ul>
 		</div>
@@ -65,10 +66,10 @@
 				.rm-slant-left {
 					border: 8px solid #c6edff;
 					height: 0;
-					margin-left: -87px;
-					margin-top: -103px;
-					transform: rotate(108deg);
-					width: 158px;
+					margin-left: -65px;
+					margin-top: -86px;
+					transform: rotate(115deg);
+					width: 113px;
 					float: left;
 				}
 
@@ -76,10 +77,10 @@
 					border: 8px solid #c6edff;
 					float: right;
 					height: 0;
-					margin-right: -87px;
-					margin-top: -103px;
-					transform: rotate(252deg);
-					width: 158px;
+					margin-right: -65px;
+					margin-top: -86px;
+					transform: rotate(245deg);
+					width: 113px;
 				}
 
 				.rm-slant-straight {
@@ -235,8 +236,64 @@
 				</div>
 			</div>
 
-			<h3 id="more">3. More roadmaps like these coming soon!</h3>
-			<p>Expect closures, typechecked annotations, and/or PHP+java+c next!</p>
+			<h3 id="closures">3. Closures</h3>
+			<p>Closures are blocked by proper type anlaysis, and then we have a couple routes to start delivering decent anonymous functions which should likely preceed closures.</p>
+
+			<div class="clearfix">
+				<div class="rm-c rm-c1">
+					<h3>ready to develop</h3>
+					<div class="rm-i">
+						<h4>Decide Anonymous Function Syntax (<a href="https://github.com/MichaelRFairhurst/wake-compiler/issues/83">#83</a>)</h4>
+						<p>The ability to annotate provisions, so that you can annotate them with a javascript method name.</p>
+					</div>
+					<div class="rm-slant-straight"></div>
+					<div class="rm-i flagship">
+						<h4>Code gen and semantics for anonymous functions</h4>
+						<p>Implement the parsing, then the semantics, then the code gen in that order.</p>
+					</div>
+					<div class="rm-slant-straight flagship"></div>
+					<div class="rm-slant-right"></div>
+					<div class="rm-i flagship">
+						<h4>Javascript callback interop</h4>
+						<p>This will enable us to interface with libraries like jQuery and angular.</p>
+					</div>
+					<h3>end</h3>
+				</div>
+
+				<div class="rm-c rm-c2">
+					<div class="rm-spacer"></div>
+					<h3>ready to develop</h3>
+					<div class="rm-i">
+						<h4>Anonymous Function Typechecking (<a href="https://github.com/MichaelRFairhurst/wake-compiler/issues/84">#84</a>)</h4>
+						<p>Proper analysis of reassigning functions to subtypes of functions and/or making arrays of subtly different lambdas are all critical to have right.</p>
+					</div>
+					<div class="rm-slant-right"></div>
+					<div class="rm-slant-left"></div>
+					<div class="rm-slant-straight"></div>
+
+					<div class="rm-i">
+						<h4>Provide anonymous functions</h4>
+						<p>Providers currently can only provide classes and primitives, need to provide these lambdas once we can define them.</p>
+					</div>
+				</div>
+
+				<div class="rm-c rm-c3">
+					<h3>ready to develop</h3>
+					<div class="rm-i">
+						<h4>Decide Method Currying Syntax (<a href="https://github.com/MichaelRFairhurst/wake-compiler/issues/85">#85</a>)</h4>
+						<p>Ability to partially (or not at all) apply methods to create functions.</p>
+					</div>
+					<div class="rm-slant-straight"></div>
+					<div class="rm-i flagship">
+						<h4>Code gen and semantics for method currying</h4>
+						<p>Implement the parsing, then the semantics, then the code gen in that order.</p>
+					</div>
+					<div class="rm-slant-left"></div>
+				</div>
+			</div>
+
+			<h3 id="more">4. More roadmaps like these coming soon!</h3>
+			<p>Expect typechecked annotations and/or PHP+java+c roadmaps next!</p>
 
 		</div>
 		</div>

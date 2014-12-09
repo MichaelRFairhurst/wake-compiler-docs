@@ -49,8 +49,10 @@
 				<li><a href="#shadowing">- Shadowing Types</a></li>
 				<li><a href="#declarations">- Declaring Variables</a></li>
 				<li><a href="#optionals">- Optional Types</a></li>
+				<li><a href="#optionalmethods">- Optional Members and Methods</a></li>
 				<li><a href="#lists">- Using Lists</a></li>
 				<li><a href="#iterating">- Iterating over Lists</a></li>
+				<li><a href="#typesafelists">- Typesafe List Access</a></li>
 				<li><a href="#classes">Classes</a></li>
 				<li><a href="#dependencies">- Dependencies</a></li>
 				<li><a href="#properties">- Properties</a></li>
@@ -428,7 +430,7 @@
 			<pre><code class="wake"
 >every OptionalTypeUsage is:
 
-    Num? -- mayReturnAnNumAndAcceptsAn(Num?) {
+    Num? -- mayReturnAnNumAndAcceptsA(Num?) {
         <span class="goodcode" title="You can always assign a real type to an optional one.">Num = 5;</span>
         <span class="goodcode" title="You can always set an optional type to Nothing.">Num = Nothing;</span>
         <span class="goodcode" title="This checks if Num is not Nothing. Inside this block, Num is no longer an optional type.">if Num exists {</span>
@@ -438,9 +440,22 @@
         }
     }
 </code></pre>
+
+			<h3 id="optionalmethods">Optional Members and Methods <span class="label label-inverse">typesafe</span></h3>
+			<p>To easily look into a data structure with optional types, you can use the <code>.?</code> operator to get members and call methods when the subject exists.</p>
+			<div class="alert alert-info">Remember, optionals can be nested as in <code>Num??</code>. You can use <code>.?</code> on a nested optional, and it will unwrap as far as it needs. Remember than nested optionals carry more meaning than a plain optional, and be wary of discounting the <i>reason</i> it was nested before you accessed it with <code>.?</code>.</div>
+			<span class="label label-info">Wake</span>
+			<pre><code class="wake"
+>every OptionalTypeUsage is:
+
+    Text? -- getNameOf(Person?) {
+        <span class="goodcode" title="This returns a name when the person exists. Therefore, instead of returning a Text it returns a Text?.">return Person.?name;</span>
+        <span class="goodcode" title="Just like working on the member 'name', you can do the same with methods like 'getName()'. Be wary of side-effects here!">return Person.?getName();</span>
+    }
+</code></pre>
 			<h3 id="lists">Using Lists <span class="label label-inverse">typesafe</span></h3>
 			<div class="alert alert-warning">
-				For ease of use, the type returned by T[x] is a T, and not a T?. For this reason, getting an unassigned list index will throw an exception so that the type system is happy. Safe array accesses which return T? and do not throw are on the way.
+				For ease of use, the type returned by T[x] is a T, and not a T?. For this reason, getting an unassigned list index will throw an exception so that the type system is happy. Safe accesses return T? and do not throw, and are covered after this.
 			</div>
 			<p>Lists (called Arrays in many other languages) are a way of storing sets of a particular type. They are incredibly useful.</p>
 			<span class="label label-info">Wake</span>
@@ -457,7 +472,7 @@
 			<p>Unless lists of lists in wake to look like <code>Num[][0]</code> or <code>Num[0][]</code>, we must face an ambiguity problem when <code>Num[]</code> and <code>Num[][]</code> share a scope. Since <code>Num[0]</code> is the correct syntax for both of these variables, the compiler forces you to rename one or the other. This is not the case for <code>Num[]</code> and <code>Num</code>.</p>
 			<hr />
 
-			<h3 id="iterating">Iterating over Lists <span class="label label-inverse">concise</span> <span class="label label-inverse">readable</span> <span class="label label-inverse">typesafe</span></h3>
+			<h3 id="iterating">Iterating over Lists <span class="label label-inverse">concise</span> <span class="label label-inverse">readable</span></h3>
 			<p>Since Wake blurs the line between variables and types, we can boast the smallest foreach loop of any language.</p>
 			<span class="label label-info">Wake</span>
 			<pre><code class="wake"
@@ -467,7 +482,7 @@
         foreach(<span class="goodcode" title="The compiler reduces Person[] to Person, and performs the following code for each person in our list.">Person[]</span>) Person.delete();
     }</code></pre>
 			<div class="alert alert-success">This works as you would expect for shadowed variables, where <code>$Person[]</code> becomes <code>$Person</code>. And it also works for expressions, where <code>foreach(db.getPeople())</code> lets you iterate over <code>Person</code>, since the compiler knows your db returns <code>Person[]</code>.</div>
-			<p>Wake also plans to supports giving custom names to the items you iterate over, and will soon support getting the index at the same time.</p>
+			<p>Wake also supports giving custom names to the items you iterate over, and will <b>soon</b> support getting the index at the same time.</p>
 			<span class="label label-info">Wake</span>
 			<pre><code class="wake"
 >every PersonDatabase is:
@@ -478,7 +493,20 @@
         foreach(Person[] <span class="goodcode" title="Sometimes its important to know the index of which Person you're iterating over.">at Num</span>) <span class="goodcode" title="Make each person greet themselves - Person and Person[Num] are equivalent.">Person.greet(Person[Num]);</span>
         foreach(person in Person[] at Num) person.greet(Person[Num]);
     }</code></pre>
+
+			<h3 id="typesafelists">Typesafe Lists <span class="label label-inverse">readable</span> <span class="label label-inverse">typesafe</span></h3>
+			<p>Of course, all lists in Wake are already typesafe. However, when writing in Wake you can choose to get an item out of an array as an optional, avoiding the often-convenient-but-sometimes-nasty <code>UndefinedIndexException</code>. The flipside of this is that you then must check that the item exists before you can use it.</p>
+			<div class="alert alert-info">This pairs especially well with the <code>.?</code> operator, allowing you to say, pass a notification easily with <code>Listener[?0].?fire(Message)</code>; safely operating only when the <code>Listener</code> exists.</div>
 			<br />
+			<pre><code class="wake"
+>every ListUsage is:
+
+    method(Num[]) {
+        var <span class="goodcode" title="We declare this as an optional num, which is more accurate. This is a good example of where we don't know the 1st Num exists, and the compiler helps us out.">Num?</span> = <span class="goodcode" title="This returns a Num? instead of throwing an UndefinedIndexException">Num[?0]</span>;
+        <span class="goodcode" title="The compiler makes sure we treat the Num as an optional, preventing bugs.">if Num exists {</span>
+            ...
+        }
+    }</code></pre>
 
 			<h1 id="classes">Classes in Wake <span class="label label-inverse">concise</span> <span class="label label-inverse">readable</span></h1>
 			<p>Wake is a truly Object Oriented language, and should come with few surprises here.</p>

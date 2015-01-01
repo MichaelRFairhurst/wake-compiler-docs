@@ -49,6 +49,7 @@
 				<li><a href="#aliases">- Aliased Variables</a></li>
 				<li><a href="#shadowing">- Shadowing Types</a></li>
 				<li><a href="#declarations">- Declaring Variables</a></li>
+				<li><a href="#primitives">- Available Primitives</a></li>
 				<li><a href="#optionals">- Optional Types</a></li>
 				<li><a href="#optionalmethods">- Optional Members and Methods</a></li>
 				<li><a href="#lists">- Using Lists</a></li>
@@ -391,10 +392,10 @@ while <span class="goodcode" title="Conditions can be any boolean expression">i 
 					<pre><code class="wake"
 >every Person is:
 
-    needs <span class="goodcode" title="You can tell the compiler its a Num called ID, or, when you want, simply call it a Num.">Num</span>;
+    needs <span class="goodcode" title="You can tell the compiler its a Int called ID, or, when you want, simply call it an Int.">Int</span>;
 
-    Num -- getId() {
-        return <span class="goodcode" title="Here we use our Num ID, that we simply chose to call 'Num.'">Num</span>;
+    Int -- getId() {
+        return <span class="goodcode" title="Here we use our Int ID, that we simply chose to call 'Int.'">Int</span>;
     }
 
     Bool -- isSameAs(<span class="goodcode" title="Save yourself writing 'Person' twice, and you get the benefit of knowing that Person is a Person.">Person</span>) {
@@ -408,7 +409,7 @@ while <span class="goodcode" title="Conditions can be any boolean expression">i 
 
     private <span class="badcode" title="Here we must say its an int, and even though that is often enough to make it unique, we must also name it.">int id</span>;
 
-    public Person(int <span class="badcode" title="Here we have made a useless name to explain that this is not the same Num as the property. The programmer juggles what this means and determines it is a useless distinction.">myid</span>) {
+    public Person(int <span class="badcode" title="Here we have made a useless name to explain that this is not the same Int as the property. The programmer juggles what this means and determines it is a useless distinction.">myid</span>) {
         id = myid;
     }
 
@@ -423,7 +424,7 @@ while <span class="goodcode" title="Conditions can be any boolean expression">i 
 				</div>
 			</div>
 			<h3 id="aliases">2. Aliasing <span class="label label-inverse">readable</span> <span class="label label-inverse">safe</span></h3>
-			<p>In our previous example, calling a person's ID <code>Num</code> is a bit ambiguous. When a type isn't meaningful for a context, use aliases.</p>
+			<p>In our previous example, calling a person's ID <code>Int</code> is a bit ambiguous. When a type isn't meaningful for a context, use aliases.</p>
 			<p>To aid the compiler, we must write aliases in lowercase, to hint that its not a type. But luckily, it turns out that the same idea is useful to humans as well. It also allows us to write aliases before or after our type to make our code more literate.</p>
 			<div class="row">
 				<div class="span6">
@@ -431,13 +432,13 @@ while <span class="goodcode" title="Conditions can be any boolean expression">i 
 					<pre><code class="wake"
 >every Person is:
 
-    needs Num <span class="goodcode" title="Here we give our Num a name.">id</span>;
+    needs Int <span class="goodcode" title="Here we give our Int a name.">id</span>;
 
-    Num -- getId() {
-        return <span class="goodcode" title="Here we use our Num by its alias, id. We know that it is not a typename.">id</span>
+    Int -- getId() {
+        return <span class="goodcode" title="Here we use our Int by its alias, id. We know that it is not a typename.">id</span>
     }
 
-    setIdThenSave(<span class="goodcode" title="You can precede variables with aliases.">newid Num</span>, <span class="goodcode" title="You can also precede variables by their type.">Bool recursively</span>) {
+    setIdThenSave(<span class="goodcode" title="You can precede variables with aliases.">newid Int</span>, <span class="goodcode" title="You can also precede variables by their type.">Bool recursively</span>) {
         ...
     }</code></pre>
 				</div>
@@ -467,12 +468,12 @@ while <span class="goodcode" title="Conditions can be any boolean expression">i 
 			<p>Instead of creating meaningless aliases as we arguably did with <code>newid</code>, we can add <code>$</code> to preserve type information while also creating a unique instance</p>
 			<span class="label label-info">Wake</span>
 			<pre><code class="wake"
->every NumContainer is:
+>every IntContainer is:
 
-    needs Num;
+    needs Int;
 
-    Num -- setToNotGreaterThan(<span class="goodcode" title="Here, all we really care about is that Num and $Num are different variables; we don't force you to come up with a unique name.">$Num</span>) {
-        if Num &gt; <span class="goodcode" title="While this can be confusing, this is a usage of $Num the argument rather than Num the property. We let you decide when its appropriate, such as short statements and algorithms.">$Num</span> then Num = $Num;
+    Int -- setToNotGreaterThan(<span class="goodcode" title="Here, all we really care about is that Int and $Int are different variables; we don't force you to come up with a unique name.">$Int</span>) {
+        if Int &gt; <span class="goodcode" title="While this can be confusing, this is a usage of $Int the argument rather than Int the property. We let you decide when its appropriate, such as short statements and algorithms.">$Int</span> then Int = $Int;
     }</code></pre>
 			<h3 id="declarations">Declaring variables <span class="label label-inverse">concise</span> <span class="label label-inverse">safe</span></h3>
 			<p>All these variable names are usable in declarations when preceded with <code>:</code>, or when in properties</p>
@@ -480,41 +481,46 @@ while <span class="goodcode" title="Conditions can be any boolean expression">i 
 			<pre><code class="wake"
 >every DeclarationExample is:
 
-    <span class="goodcode" title="Here we define an object property.">with Num here = 4;</span>
-    with some Num = 4;
-    with $Num = 4;
-    <span class="goodcode" title="Properties can be public.">with public Num too = 5;</span>
+    <span class="goodcode" title="Here we define an object property.">with Int here = 4;</span>
+    with some Int = 4;
+    with $Int = 4;
+    <span class="goodcode" title="Properties can be public.">with public Int too = 5;</span>
 
-    <span class="goodcode" title="Here we define dependencies.">needs another Num, $$Num, Num again;</span>
+    <span class="goodcode" title="Here we define dependencies.">needs another Int, $$Int, Int again;</span>
 
     declareThem() {
-        <span class="goodcode" title="Here we define variables within a method.">var local Num = 4;</span>
-        var second Num = 4;
-        var $$$Num = 5;
-        <span class="badcode" title="Compiler error! In Wake you cannot redefine variables.">var Num = 3</span>;
+        <span class="goodcode" title="Here we define variables within a method.">var local Int = 4;</span>
+        <span class="goodcode" title="Type inference can infer variable types when you assign them to a clear value such as in this case">var inferredVar = 4;</span>
+        var second Int = 4;
+        var $$$Int = 5;
+        <span class="badcode" title="Compiler error! In Wake you cannot redefine variables.">var Int = 3</span>;
     }</code></pre>
 
-			<h3 id="optionals">Optional Types <span class="label label-inverse">typesafe</span></h3>
-			<p>Wake will guarantee the existence of most variables, arguments, and return types. This prevents rogue NullPointerExceptions, or segfaults, or fatal errors that large apps in other languages frequently succumb to.</p>
-			<p>The flip side to this is that when a value may not exist, it must be declared <i>optional</i> with <code>?</code>. Before using an optional type, the compiler ensures you have accounted for the possibility of it not existing with <code>exists</code> clauses.</p>
+			<h3 id="primitives">Available Primitives <span class="label label-inverse">readable</code></h3>
+			<div class="alert alert-error">Supporting JavaScript creates many tricky situations around overflow and performance. For the time being, overflow will be treated as undefined behavior as it is in C++</div>
+			<p>The primitives <code>Num</code>, <code>Int</code>, <code>Text</code>, <code>Char</code>, and <code>Bool</code> are all available, and all have literals for use.</p>
+			<p>See <a href="std.html">the standard library</a> for methods you can call on these primitives.</p>
 			<span class="label label-info">Wake</span>
 			<pre><code class="wake"
->every OptionalTypeUsage is:
+>every PrimitivesExample is:
 
-    Num? -- mayReturnAnNumAndAcceptsA(Num?) {
-        <span class="goodcode" title="You can always assign a real type to an optional one.">Num = 5;</span>
-        <span class="goodcode" title="You can always set an optional type to nothing.">Num = nothing;</span>
-        <span class="goodcode" title="This checks if Num is not nothing. Inside this block, Num is no longer an optional type.">if Num exists {</span>
-            return Num + 7;
-        } else {
-            return nothing;
-        }
+    myMethod() {
+        var Int = <span class="goodcode" title="This is NOT a Num, though often the typechecker allows Ints to be used in place of Nums.">123</span>;
+        var Num = <span class="goodcode" title="This is NOT an Int. Unlike java, '123.' is not a valid Num, only 123.0 is.">123.0</span>;
+        var Text = <span class="goodcode" title="Text is our better term for String">"Hello";</span>;
+        var Text singlequoted = <span class="goodcode" title="Double or single quotes are both OK">'Hello';</span>;
+        var Char = <span class="goodcode" title="Any text literal of a single char is considered a char for you">" "</span>;
+        var Char singlequoted = <span class="goodcode" title="Double or single quotes are both OK">' ';</span>;
+        var Text ofLengthOne = <span class="goodcode" title="Append an 's' to a char literal to treat it as a Text, though most APIs should be built to accept both when it is reasonable.">' 's;</span>;
+        var Char newline = <span class="goodcode" title="Escapes can be done without quotes and are treated as Chars">\n;</span>;
+        var Char singlequote = <span class="goodcode" title="Escapes can be done without quotes and are treated as Chars">\';</span>;
+        var Char doublequote = <span class="goodcode" title="Escapes can be done without quotes and are treated as Chars">\";</span>;
     }
 </code></pre>
 
 			<h3 id="optionalmethods">Optional Members and Methods <span class="label label-inverse">typesafe</span></h3>
 			<p>To easily look into a data structure with optional types, you can use the <code>.?</code> operator to get members and call methods when the subject exists.</p>
-			<div class="alert alert-info">Remember, optionals can be nested as in <code>Num??</code>. You can use <code>.?</code> on a nested optional, and it will unwrap as far as it needs. Remember than nested optionals carry more meaning than a plain optional, and be wary of discounting the <i>reason</i> it was nested before you accessed it with <code>.?</code>.</div>
+			<div class="alert alert-info">Remember, optionals can be nested as in <code>Int??</code>. You can use <code>.?</code> on a nested optional, and it will unwrap as far as it needs. Remember than nested optionals carry more meaning than a plain optional, and be wary of discounting the <i>reason</i> it was nested before you accessed it with <code>.?</code>.</div>
 			<span class="label label-info">Wake</span>
 			<pre><code class="wake"
 >every OptionalTypeUsage is:
@@ -533,14 +539,14 @@ while <span class="goodcode" title="Conditions can be any boolean expression">i 
 			<pre><code class="wake"
 >every ListUsage is:
 
-    methodWithListArgument(<span class="goodcode" title="Here we accept a list of Nums">Num[]</span>) {
-        <span class="goodcode" title="Set the first Num in the list.">Num[0] = 5;</span>
-        <span class="goodcode" title="Declare an empty list of Nums again.">var $Num[] = [];</span>
-        <span class="goodcode" title="Declare a list of Nums again, except with three starting values.">var $$Num[] = [1, 2, 3];</span>
-        <span class="goodcode" title="Declare a list lists of Nums, containing our lists of Nums.">var combined Num[][] = [Num[], $Num[], $$Num[]];</span>
+    methodWithListArgument(<span class="goodcode" title="Here we accept a list of Ints">Int[]</span>) {
+        <span class="goodcode" title="Set the first Int in the list.">Int[0] = 5;</span>
+        <span class="goodcode" title="Declare an empty list of Ints again.">var $Int[] = [];</span>
+        <span class="goodcode" title="Declare a list of Ints again, except with three starting values.">var $$Int[] = [1, 2, 3];</span>
+        <span class="goodcode" title="Declare a list lists of Ints, containing our lists of Ints.">var combined Int[][] = [Int[], $Int[], $$Int[]];</span>
     }</code></pre>
-			<div class="alert alert-warning">You will get an error if you try to declare <code>Num[]</code> in the same scope as <code>Num[][]</code>, and for good reason.</div>
-			<p>Unless lists of lists in Wake to look like <code>Num[][0]</code> or <code>Num[0][]</code>, we must face an ambiguity problem when <code>Num[]</code> and <code>Num[][]</code> share a scope. Since <code>Num[0]</code> is the correct syntax for both of these variables, the compiler forces you to rename one or the other. This is not the case for <code>Num[]</code> and <code>Num</code>.</p>
+			<div class="alert alert-warning">You will get an error if you try to declare <code>Int[]</code> in the same scope as <code>Int[][]</code>, and for good reason.</div>
+			<p>Unless lists of lists in Wake to look like <code>Int[][0]</code> or <code>Int[0][]</code>, we must face an ambiguity problem when <code>Int[]</code> and <code>Int[][]</code> share a scope. Since <code>Int[0]</code> is the correct syntax for both of these variables, the compiler forces you to rename one or the other. This is not the case for <code>Int[]</code> and <code>Int</code>.</p>
 			<hr />
 
 			<h3 id="iterating">Iterating over Lists <span class="label label-inverse">concise</span> <span class="label label-inverse">readable</span></h3>
@@ -566,8 +572,8 @@ while <span class="goodcode" title="Conditions can be any boolean expression">i 
     delete(Person[]) {
         foreach <span class="goodcode" title="Explicitly name the variable you're iterating over.">$Person</span> in Person[] do $Person.delete();
         foreach person in Person[] do person.delete();
-        foreach Person[] <span class="goodcode" title="Sometimes its important to know the index of which Person you're iterating over.">at Num</span> do <span class="goodcode" title="Make each person greet themselves - Person and Person[Num] are equivalent.">Person.greet(Person[Num]);</span>
-        foreach person in Person[] at Num do person.greet(Person[Num]);
+        foreach Person[] <span class="goodcode" title="Sometimes its important to know the index of which Person you're iterating over.">at Int</span> do <span class="goodcode" title="Make each person greet themselves - Person and Person[Int] are equivalent.">Person.greet(Person[Int]);</span>
+        foreach person in Person[] at Int do person.greet(Person[Int]);
     }</code></pre>
 
 			<h3 id="typesafelists">Typesafe Lists <span class="label label-inverse">readable</span> <span class="label label-inverse">typesafe</span></h3>
@@ -577,9 +583,9 @@ while <span class="goodcode" title="Conditions can be any boolean expression">i 
 			<pre><code class="wake"
 >every ListUsage is:
 
-    method(Num[]) {
-        var <span class="goodcode" title="We declare this as an optional num, which is more accurate. This is a good example of where we don't know the 1st Num exists, and the compiler helps us out.">Num?</span> = <span class="goodcode" title="This returns a Num? instead of throwing an UndefinedIndexException">Num[?0]</span>;
-        <span class="goodcode" title="The compiler makes sure we treat the Num as an optional, preventing bugs.">if Num exists {</span>
+    method(Int[]) {
+        var <span class="goodcode" title="We declare this as an optional num, which is more accurate. This is a good example of where we don't know the 1st Int exists, and the compiler helps us out.">Int?</span> = <span class="goodcode" title="This returns an Int? instead of throwing an UndefinedIndexException">Int[?0]</span>;
+        <span class="goodcode" title="The compiler makes sure we treat the Int as an optional, preventing bugs.">if Int exists {</span>
             ...
         }
     }</code></pre>
@@ -604,7 +610,7 @@ while <span class="goodcode" title="Conditions can be any boolean expression">i 
     <span class="goodcode" title="Here we have an object property.">with public Text name;</span>
     <span class="goodcode" title="Properties default to private.">with Text ssn;</span>
 
-    needs <span class="goodcode" title="Here we have dependencies. The object cannot exist without them.">Num id, Printer</span> then {
+    needs <span class="goodcode" title="Here we have dependencies. The object cannot exist without them.">Int id, Printer</span> then {
         <span class="goodcode" title="You can declare 'needs nothing then {...} to have a constructor with no dependencies.">// constructor body</span>
     }
 
@@ -624,12 +630,12 @@ while <span class="goodcode" title="Conditions can be any boolean expression">i 
 			<span class="label label-info">Wake</span>
 			<pre><code class="wake"
 >every IncrementingProperties is:
-    needs Num starter, Printer {
+    needs Int starter, Printer {
         Printer.print(<span class="goodcode" title="By now, the property sum exists.">sum</span>);
     }
 
-    with Num <span class="goodcode" title="When plusone is declared, starter already exists since its a dependency.">plusone = starter + 1;</span>
-    with Num <span class="goodcode" title="Since plustwo is declared after plusone, we can use it to evaluate its initial value.">plustwo = starter + 2;</span></code></pre>
+    with Int <span class="goodcode" title="When plusone is declared, starter already exists since its a dependency.">plusone = starter + 1;</span>
+    with Int <span class="goodcode" title="Since plustwo is declared after plusone, we can use it to evaluate its initial value.">plustwo = starter + 2;</span></code></pre>
 			<h3 id="inheritance">Inheritance <span class="label label-inverse">testable</span> <span class="label label-inverse">flexible</span> <span class="label label-inverse">readable</span></h3>
 			<p>Every class can be inherited with or without keeping behavior, with the keywords <code>a</code>/<code>an</code>, and <code>capable</code>. Usually in small projects the point of inheritance is to copy the code from that class, however, it is not always desirable. If you use <code>capable</code>, you must rewrite the methods of your child class. These actions are called <i>extending</i> vs <i>implementing</i>.</p>
 			<p>An additional value to implementing classes with <code>capable</code> instead of extending classes with <code>a</code>/<code>an</code>, is that you can implement multiple classes even though you can only extend one class.</p>
@@ -686,10 +692,10 @@ every ModuleExample is:
     ReturnType -- methodWithReturn() {}
     methodWithNoReturnValue() {}
     abstractMethodWithNoImplementation();
-    methodWithArgument(Num) {}
-    methodWithArgument(this Num) {}
-    methodWithArgument(Num here) {}
-    methodWith(Num)ArgumentAnd(Text)Argument() {}</code></pre>
+    methodWithArgument(Int) {}
+    methodWithArgument(this Int) {}
+    methodWithArgument(Int here) {}
+    methodWith(Int)ArgumentAnd(Text)Argument() {}</code></pre>
 			<h3 id="invoking">Invoking Methods <span class="label label-inverse">readable</span></h3>
 			<p>Invoking methods (that is, calling a method's code on a particular object and argument set) looks almost exactly like defining one.</p>
 			<span class="label label-info">Wake</span>
@@ -709,8 +715,8 @@ every ModuleExample is:
         <span class="goodcode" title="Here we can write code that returns if a Text comes alphabetically before another.">//...</span>
     }
 
-    Bool -- compare( Num )And( $Num ) {
-        <span class="goodcode" title="Here we can write code that returns if a Num is less than the other.">return Num &lt; $Num;</span>
+    Bool -- compare( Int )And( $Int ) {
+        <span class="goodcode" title="Here we can write code that returns if a Int is less than the other.">return Int &lt; $Int;</span>
     }</code></pre>
 		<hr />
 		<h3 id="generics">Generics <span class="label label-inverse">flexible</span> <span class="label label-inverse">typesafe</span></h3>
@@ -733,10 +739,10 @@ every ModuleExample is:
 			<span class="label label-info">Wake</span>
 		<pre><code class="wake"
 >every Squarer is:
-    needs Num;
-    provides <span class="goodcode" title="Specific variations of generics can be properties, provisions, needs, and more.">CalculationCache{Num};</span>
-    with CalculationCache{Num} <span class="goodcode" title="Create a calculation cache that squares Num">&lt;(Num -- fn() { return Num * Num; }) this;</span>
-    Num -- get() {
+    needs Int;
+    provides <span class="goodcode" title="Specific variations of generics can be properties, provisions, needs, and more.">CalculationCache{Int};</span>
+    with CalculationCache{Int} <span class="goodcode" title="Create a calculation cache that squares Int">&lt;(Int -- fn() { return Int * Int; }) this;</span>
+    Int -- get() {
         return CalculationCache.getValue();
     }</code></pre>
 		<h3 id="genericmethods">Generic Methods <span class="label label-inverse">flexible</span> <span class="label label-inverse">typesafe</span> <span class="label label-inverse">concise</span></h3>
@@ -744,7 +750,7 @@ every ModuleExample is:
 		<pre><code class="wake"
 >every ListAsserts is:
 
-    <span class="goodcode" title="Declare this a generic method. You can name multiple generic types. In this case we declare just T.">{T}</span> that(<span class="goodcode" title="Accept a list of Ts, no matter what T is.">T[]</span>)HasLength(Num) {...}
+    <span class="goodcode" title="Declare this a generic method. You can name multiple generic types. In this case we declare just T.">{T}</span> that(<span class="goodcode" title="Accept a list of Ts, no matter what T is.">T[]</span>)HasLength(Int) {...}
 
     <span class="goodcode" title="Declare this a generic method. You can name multiple generic types. In this case we declare just T.">{T}</span> that(<span class="goodcode" title="Accept a list of Ts, no matter what T is.">T[]</span>)Matches(<span class="goodcode" title="Once again, accept a list of anything. However, this must be a list of the same thing that our other argument in, since they both share the name T.">T[]</span>) {...}</code></pre>
 		<p>Calling this generic method looks just like normal: <code>ListAsserts.that([5,6])HasLength(2)</code>. Note that you can have multiple comma separated generic types. Also note that in the second example there are two usages of <code>T</code>; these must match at call time or the compiler will reject your program.</p>
@@ -790,12 +796,12 @@ every User is:
 
     needs <span class="goodcode" title="Here we require the Default DBConnection.">DBConnection:Default</span>;</code></pre>
 		<h3 id="primitiveprovisions">Primitive Provisions <span class="label label-inverse">typesafe</span></h3>
-		<p>Primitive provisions cannot be plain, since the compiler can't tell you what Num to provide. Additionally, they must be specified, to ensure you get the right value. These are the equivalent of constants in Wake, and bind directly to a primitive value.</p>
+		<p>Primitive provisions cannot be plain, since the compiler can't tell you what Int to provide. Additionally, they must be specified, to ensure you get the right value. These are the equivalent of constants in Wake, and bind directly to a primitive value.</p>
 			<span class="label label-info">Wake</span>
 		<pre><code class="wake"
 >every PrimitiveProvider is:
 
-    provides Text:Username &lt;- "MyUser", Num:Port &lt;- 3306;</code></pre>
+    provides Text:Username &lt;- "MyUser", Int:Port &lt;- 3306;</code></pre>
 
 		<h3 id="ctorprovisions">Constructor Provisions <span class="label label-inverse">flexible</span></h3>
 		<p>We call this constructor provision since it most closely resembles constructors in languages like Java. However, it is merely a way of matching provisions to specific dependencies.</p>
@@ -803,9 +809,9 @@ every User is:
 		<pre><code class="wake"
 >every Provider is:
     provides
-        Num:Port &lt;- 3307,
+        Int:Port &lt;- 3307,
         Text:Username &lt;- "Test",
-        DBConnection:Test &lt;- DBConnection(<span class="goodcode" title="If a DBConnection accepts any Text username, we can create specialized connections by letting the provider find the right Username and Port.">Text:Username, Num:Port</span>),
+        DBConnection:Test &lt;- DBConnection(<span class="goodcode" title="If a DBConnection accepts any Text username, we can create specialized connections by letting the provider find the right Username and Port.">Text:Username, Int:Port</span>),
         <span class="goodcode" title="Constructor provisions do not require specialization.">User</span> &lt;- <span class="goodcode" title="Constructor provisions can be used with subtype provision simultaneously.">TestUser</span>(DBConnection:Test);</code></pre>
 		<p>If a class with needs extends another class with needs, constructor provisions require that you supply all of these. When doing this, supply the childclass needs first, and then the parent class needs, in that order. And don't worry, the compiler will make sure you don't mess up.</p>
 
@@ -856,9 +862,9 @@ every PersonProvider is:
 		<pre><code class="wake"
 >every ListSorter is:
 
-    sort(Num[]) {
-        Num[].each({ <span class="goodcode" title="Declare one argument to this function, Num">Num</span> <span class="goodcode" title="A dashrocket separates arguments from the closure body">-&gt;</span> <span class="goodcode" title="Here the body of the function goes. You can have any type of statement in here: if statements, return statements, etc.">if Num == ... { ... }</span> });
-        Num[].sort({ <span class="goodcode" title="Declare two arguments to this function, Num and $Num">Num, $Num</span> <span class="goodcode" title="An equalsrocket saves you the hassle of writing return statements manually.">=&gt;</span> <span class="goodcode" title="Since we used =>, we put an expression instead of a statement, and can skip the ending semicolon">Num &lt; $Num</span> });
+    sort(Int[]) {
+        Int[].each({ <span class="goodcode" title="Declare one argument to this function, Int">Int</span> <span class="goodcode" title="A dashrocket separates arguments from the closure body">-&gt;</span> <span class="goodcode" title="Here the body of the function goes. You can have any type of statement in here: if statements, return statements, etc.">if Int == ... { ... }</span> });
+        Int[].sort({ <span class="goodcode" title="Declare two arguments to this function, Int and $Int">Int, $Int</span> <span class="goodcode" title="An equalsrocket saves you the hassle of writing return statements manually.">=&gt;</span> <span class="goodcode" title="Since we used =>, we put an expression instead of a statement, and can skip the ending semicolon">Int &lt; $Int</span> });
     }</code></pre>
 
 		<h3 id="astypes">As Types <span class="label label-inverse">readable</span> <span class="label label-inverse">typesafe</span></h3>
@@ -868,7 +874,7 @@ every PersonProvider is:
 		<pre><code class="wake"
 >every HigherOrderFunctionUtil is:
 
-    useMysteryNumber(<span class="goodcode" title="The type of this argument is a function which accepts a Num">fn(Num)</span> <span class="goodcode" title="Closures require names, in this case, mysteryFn">mysteryFn</span>) {
+    useMysteryNumber(<span class="goodcode" title="The type of this argument is a function which accepts a Int">fn(Int)</span> <span class="goodcode" title="Closures require names, in this case, mysteryFn">mysteryFn</span>) {
         <span class="goodcode" title="Simply invoke the variable with the correct arguments as if it were a method.">mysteryFn(10)</span>;
     }
 
@@ -888,11 +894,11 @@ every PersonProvider is:
 >every TypeInferenceExample is:
 
     examples() {
-        Num[].each({ -&gt;
+        Int[].each({ -&gt;
             <span class="goodcode" title="The return type is properly inferred as a boolean. If you have multiple return statements, they are properly unified, if possible.">return true;</span>
         });
 
-        Num[].sort({ <span class="goodcode" title="Since this is used as an argument that expects a function comparing two Nums, both of these arguments are inferred to be Nums.">a, b</span> =&gt; a &lt; b });
+        Int[].sort({ <span class="goodcode" title="Since this is used as an argument that expects a function comparing two Ints, both of these arguments are inferred to be Ints.">a, b</span> =&gt; a &lt; b });
     }</code></pre>
 
 		<h3 id="selfexecuting">Self Executing <span class="label label-inverse">flexible</span></h3>
@@ -906,7 +912,7 @@ every PersonProvider is:
 
     myMethod() {
          5 + <span class="badcode" title="For the moment, to aid the way parsers detect blocks vs closures, you must wrap self invoked closures in parenthesis before their invocation.">({</span> -&gt;
-                 var Num[] = [1, 2, 5];
+                 var Int[] = [1, 2, 5];
                  <span class="goodcode" title="Any expressions and statements can be included.">//...</span>
                  <span class="goodcode" title="We can use return statements to pass back the number that will be added to 5">return 10;</span>
             })<span class="goodcode" title="Here we immediately run the closure and get its result. This time we pass no arguments, but we can pass arguments when the functions use them.">()</span>;
@@ -922,12 +928,12 @@ every PersonProvider is:
 
     with Text[] cachesById;
 
-    putCache(Num, Text) {
-        cacheById[Num] = Text;
+    putCache(Int, Text) {
+        cacheById[Int] = Text;
     }
 
-    <span class="goodcode" title="The cache we return is a function that returns text when given a Num.">Text -- fn(Num)</span> -- getCache() {
-        return { Num =&gt; <span class="goodcode" title="No matter where this function is passed or shared, cacheById will always reference this object's property">cacheById[Num]</span> };
+    <span class="goodcode" title="The cache we return is a function that returns text when given an Int.">Text -- fn(Int)</span> -- getCache() {
+        return { Int =&gt; <span class="goodcode" title="No matter where this function is passed or shared, cacheById will always reference this object's property">cacheById[Int]</span> };
     }</code></pre>
 
 		<h3 id="enclosing">Enclosing Local Vars <span class="label label-inverse">concise</span> <span class="label label-inverse">flexible</span> <span class="label label-inverse">typesafe</span></h3>
@@ -940,10 +946,10 @@ every PersonProvider is:
     needs Printer;
 
     setOnVisit(Visitable) {
-        <span class="goodcode" title="Each visitable will get its own Num that starts at 0, saving you boilerplate classes just to create a new type of state for one variable.">var Num = 0;</span>
+        <span class="goodcode" title="Each visitable will get its own Int that starts at 0, saving you boilerplate classes just to create a new type of state for one variable.">var Int = 0;</span>
         Visitable.onVisit = { -&gt;
-            Printer.printLine(Num);
-            <span class="goodcode" title="Increase the Num created for this visitor.">Num = Num + 1;</span>
+            Printer.printLine(Int);
+            <span class="goodcode" title="Increase the Int created for this visitor.">Int = Int + 1;</span>
         }
     }</code></pre>
 
@@ -953,12 +959,12 @@ every PersonProvider is:
 		<pre><code class="wake"
 >every MyClass
 
-    Num -- myMethod(Bool) {
+    Int -- myMethod(Bool) {
         return <span class="goodcode" title="Return 4 on the true case of our condition">4</span> if <span class="goodcode" title="The value of this Bool variable determines if we evaluate the left or right expression">Bool</span> else <span class="goodcode" title="Return 5 when our variable Bool is false">5</span>;
     };</code></pre>
 
 		<h3 id="annotations">Annotations <span class="label label-inverse">readable</span> <span class="label label-inverse">testable</span> <span class="label label-inverse">flexible</span></h3>
-		<p>Wake now has unchecked annotations. We have a plan to typecheck the values you use, in which annotations, on what parts of your source code. But for now, you can freely annotate classes, methods, and needs with values such as Texts, Bools, Nums, and even nothing. This is currently used by our unit test library, but can be used for so so much more.<p>
+		<p>Wake now has unchecked annotations. We have a plan to typecheck the values you use, in which annotations, on what parts of your source code. But for now, you can freely annotate classes, methods, and needs with values such as Texts, Bools, Ints, and even nothing. This is currently used by our unit test library, but can be used for so so much more.<p>
 			<span class="label label-info">Wake</span>
 		<pre><code class="wake"
 ><span class="goodcode" title="The wUnit unit testing library can use compile-time reflection to see that this is a test class.">@TestClass</span>

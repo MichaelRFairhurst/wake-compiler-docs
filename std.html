@@ -27,6 +27,7 @@
 			<hr />
 			<ul class="nav nav-tabs nav-stacked">
 				<li><a href="#stdlib">Standard Library</a></li>
+				<li><a href="#int">- lang.Int</a></li>
 				<li><a href="#num">- lang.Num</a></li>
 				<li><a href="#text">- lang.Text</a></li>
 				<li><a href="#bool">- lang.Bool</a></li>
@@ -53,39 +54,60 @@
 				<p>There isn't much development on the standard library yet.</p>
 				<p>Note that classes in the <code>lang</code> module do not need to be imported.</p>
 				<br/>
+				<h3 id="num">lang.Int</h3>
+				<p>needs: <code>nothing</code>.</p>
+				<p><code>Text -- toText()</code></p>
+				<p>&nbsp;&nbsp; Convert an integer into its Text equivalet. Example: <code>5.toText(); // "5"</code></p>
+				<p><code>Int -- squared()</code></p>
+				<p>&nbsp;&nbsp; Take the integer to the second power. Example: <code>4.squared(); // 16</code></p>
+				<p><code>Int -- abs()</code></p>
+				<p>&nbsp;&nbsp; Get the absolute value of the integer. Example: <code>-4.abs(); // 4</code></p>
+				<p><code>Int -- orMaxOf(Int)</code></p>
+				<p>&nbsp;&nbsp; Return the argument Int if greater than the target integer, otherwise return the target integer. Example: <code>5.orMaxOf(8); // 8</code></p>
+				<p><code>Int -- orMaxOf(Int[])</code></p>
+				<p>&nbsp;&nbsp; Return the largest integer in the list, or the integer itself if it is larger than each element in the list. Example: <code>5.orMaxOf([2, 5, 8]); // 8</code></p>
+				<p><code>Int -- orMinOf(Int)</code></p>
+				<p>&nbsp;&nbsp; Return the argument Int if less than the target integer, otherwise return the target integer. Example: <code>5.orMinf(8); // 5</code></p>
+				<p><code>Int -- orMinOf(Int[])</code></p>
+				<p>&nbsp;&nbsp; Return the smallest integer in the list, or the integer itself if it is smaller than each element in the list. Example: <code>5.orMinOf([2, 5, 8]); // 2</code></p>
+				<p><code>Int -- numberOfDigits()</code></p>
+				<p>&nbsp;&nbsp; Count how many digits are in the integer. Example: <code>123.numberOfDigits(); // 3</code></p>
+				<p><code>Int -- range(Int)</code></p>
+				<p>&nbsp;&nbsp; <span class="label label-warning">This will change in the future to be noninclusive</span> Return a list of each integer including and up to the argument, beginning at the target integer. Example: <code>5.range(8); // [5, 6, 7, 8]</code></p>
+				<p><code>times(fn())</code></p>
+				<p>&nbsp;&nbsp; Execute a function Int times. Example: <code>3.times({ -&gt; myvar = myvar.squared(); }); // myvar.squared().squared().squared()</code></p>
+				<p><code>Char -- fromAsciiCode()</code></p>
+				<p>&nbsp;&nbsp; Treat this Int as an ascii code and return the corresponding Char. Example: <code>10.fromAsciiCode(); // \n</code></p>
+				<br/>
 				<h3 id="num">lang.Num</h3>
 				<p>needs: <code>nothing</code>.</p>
-				<p><code>Text -- toString()</code></p>
-				<p>&nbsp;&nbsp; Convert a number into its Text equivalet. Example: <code>5.toString(); // "5"</code></p>
-				<p><code>Num -- modulo(Num)</code></p>
-				<p>&nbsp;&nbsp; Get the remainder from division. Example: <code>5.modulo(2); // 1</code></p>
+				<p><code>Text -- toText()</code></p>
+				<p>&nbsp;&nbsp; Convert a number into its Text equivalet. Example: <code>5.0.toText(); // "5.0"</code></p>
 				<p><code>Num -- floor()</code></p>
-				<p>&nbsp;&nbsp; Round down to the nearest integer. Example: <code>5.9.floor(); // 5</code></p>
+				<p>&nbsp;&nbsp; Round down to the nearest integer. Example: <code>5.9.floor(); // 5.0</code></p>
 				<p><code>Num -- round()</code></p>
-				<p>&nbsp;&nbsp; Round to the nearest integer. Example: <code>5.5.round(); // 6</code></p>
+				<p>&nbsp;&nbsp; Round to the nearest integer. Example: <code>5.5.round(); // 6.0</code></p>
 				<p><code>Num -- ceil()</code></p>
-				<p>&nbsp;&nbsp; Round up to the nearest integer. Example: <code>5.1.ceil(); // 6</code></p>
+				<p>&nbsp;&nbsp; Round up to the nearest integer. Example: <code>5.1.ceil(); // 6.0</code></p>
 				<p><code>Num -- squared()</code></p>
-				<p>&nbsp;&nbsp; Take the number to the second power. Example: <code>4.squared(); // 16</code></p>
+				<p>&nbsp;&nbsp; Take the number to the second power. Example: <code>4.0.squared(); // 16.0</code></p>
 				<p><code>Num -- abs()</code></p>
-				<p>&nbsp;&nbsp; Get the absolute value of the number. Example: <code>-4.abs(); // 4</code></p>
+				<p>&nbsp;&nbsp; Get the absolute value of the number. Example: <code>-4.0.abs(); // 4.0</code></p>
 				<p><code>Num -- orMaxOf(Num)</code></p>
-				<p>&nbsp;&nbsp; Return the argument Num if greater than the target number, otherwise return the target number. Example: <code>5.orMaxOf(8); // 8</code></p>
+				<p>&nbsp;&nbsp; Return the argument Num if greater than the target number, otherwise return the target number. Example: <code>5.5.orMaxOf(8.1); // 8.1</code></p>
 				<p><code>Num -- orMaxOf(Num[])</code></p>
-				<p>&nbsp;&nbsp; Return the largest number in the list, or the number itself if it is larger than each element in the list. Example: <code>5.orMaxOf([2, 5, 8]); // 8</code></p>
+				<p>&nbsp;&nbsp; Return the largest number in the list, or the number itself if it is larger than each element in the list. Example: <code>5.5.orMaxOf([2.1, 5.2, 8.3]); // 8.3</code></p>
 				<p><code>Num -- orMinOf(Num)</code></p>
-				<p>&nbsp;&nbsp; Return the argument Num if less than the target number, otherwise return the target number. Example: <code>5.orMinf(8); // 5</code></p>
+				<p>&nbsp;&nbsp; Return the argument Num if less than the target number, otherwise return the target number. Example: <code>5.5.orMinf(8.2); // 5.5</code></p>
 				<p><code>Num -- orMinOf(Num[])</code></p>
-				<p>&nbsp;&nbsp; Return the smallest number in the list, or the number itself if it is smaller than each element in the list. Example: <code>5.orMinOf([2, 5, 8]); // 2</code></p>
+				<p>&nbsp;&nbsp; Return the smallest number in the list, or the number itself if it is smaller than each element in the list. Example: <code>5.5.orMinOf([2.1, 5.2, 8.3]); // 2.1</code></p>
 				<p><code>Num -- numberOfDigits()</code></p>
-				<p>&nbsp;&nbsp; Count how many digits are in the number. Example: <code>123.numberOfDigits(); // 3</code></p>
-				<p><code>Num -- range(Num)</code></p>
-				<p>&nbsp;&nbsp; Return a list of each number including and up to the argument, beginning at the target number. Example: <code>5.range(8); // [5, 6, 7, 8]</code></p>
+				<p>&nbsp;&nbsp; Count how many digits are in the number. Example: <code>123.5.numberOfDigits(); // 3</code></p>
 				<br/>
 				<h3 id="text">lang.Text</h3>
 				<p>needs: <code>nothing</code>.</p>
 				<p><code>Text -- join(Text[])</code></p>
-				<p>&nbsp;&nbsp; Join together the list of texts by a glue string. Example: <code>", ".join(["hey", "not cool"]); // "hey, not cool"</code></p>
+				<p>&nbsp;&nbsp; Join together the list of texts by a glue Text. Example: <code>", ".join(["hey", "not cool"]); // "hey, not cool"</code></p>
 				<p><code>Text -- toUpper()</code></p>
 				<p>&nbsp;&nbsp; Get the all uppercase equivalent of the target text. Example: <code>"Hello".toUpper(); // "HELLO"</code></p>
 				<p><code>Text -- toLower()</code></p>
@@ -94,51 +116,78 @@
 				<p>&nbsp;&nbsp; Swap the casing of each charecter in the target text. Example: <code>"Hello".switchCase(); // "hELLO"</code></p>
 				<p><code>Text -- trim()</code></p>
 				<p>&nbsp;&nbsp; Remove whitespace (tabs, newlines, spaces, etc) from  the beginning and ending of the Text. Example: <code>"  Hello  ".trim(); // "Hello"</code></p>
-				<p><code>Num -- getSize()</code></p>
+				<p><code>Int -- getSize()</code></p>
 				<p>&nbsp;&nbsp; Get the number of characters in a Text. Example: <code>"Hello".getSize(); // 5</code></p>
-				<p><code>Text -- substr(Num start)</code></p>
+				<p><code>Text -- substr(Int start)</code></p>
 				<p>&nbsp;&nbsp; Cut from the character at the starting index until the end of the Text. A negative start index counts from the end of the Text. Example: <code>"Hello".substr(1); // "ello"</code></p>
-				<p><code>Text -- substr(Num start, Num end)</code></p>
+				<p><code>Text -- substr(Int start, Int end)</code></p>
 				<p>&nbsp;&nbsp; Cut from the character at the starting index until, but not including, the ending index of the Text. A negative start or ending index counts from the end of the Text. Example: <code>"Hello".substr(1, 3); // "ell"</code></p>
+				<p><code>Int? -- parseInt()</code></p>
+				<p>&nbsp;&nbsp; Read the Text as if it were an Int. If parsing fails, it will return nothing. Example: <code>"5".parseNum(); // 5</code></p>
 				<p><code>Num? -- parseNum()</code></p>
 				<p>&nbsp;&nbsp; Read the Text as if it were a Num. If parsing fails, it will return nothing. Example: <code>"5.5".parseNum(); // 5.5</code></p>
-				<p><code>Text? -- charAt(Num)</code></p>
+				<p><code>Text? -- charAt(Int)</code></p>
 				<p>&nbsp;&nbsp; Get the character at a particular index of the Text, or nothing if the index is longer than the Text. Example: <code>"Hello".charAt(2); // "e"</code></p>
 				<p><code>Text[] -- split(Text)</code></p>
-				<p>&nbsp;&nbsp; Find each occurence of Text within the target Text, and return the content that separates them in a List. Example: <code>"Foo bar baz".split(" "); // ["Foo", "bar", "baz"]</code></p>
-				<p><code>Num? -- indexOf(Text)</code></p>
-				<p>&nbsp;&nbsp; Return the index of the first occurence of Text. If it never occurs, return nothing. Example: <code>"Hello".indexOf("l"); // 2</code></p>
+				<p>&nbsp;&nbsp; Find each occurence of Text within the target Text, and return the content that separates them in a List. Example: <code>"Foo? bar? baz?".split("? "); // ["Foo", "bar", "baz"]</code></p>
+				<p><code>Text[] -- split(Char)</code></p>
+				<p>&nbsp;&nbsp; Find each occurence of Char within the target Text, and return the content that separates them in a List. Example: <code>"Foo bar baz".split(" "); // ["Foo", "bar", "baz"]</code></p>
+				<p><code>Int? -- indexOf(Text)</code></p>
+				<p>&nbsp;&nbsp; Return the index of the first occurence of Text. If it never occurs, return nothing. Example: <code>"Hello".indexOf("lo"); // 3</code></p>
+				<p><code>Int? -- indexOf(Char)</code></p>
+				<p>&nbsp;&nbsp; Return the index of the first occurence of Char. If it never occurs, return nothing. Example: <code>"Hello".indexOf("l"); // 2</code></p>
+				<p><code>Char[] -- toCharArray()</code></p>
+				<p>&nbsp;&nbsp; Split a Text into an array of its Char components. Example: <code>"Hello".toCharArray(); // ['h', 'e', 'l', 'l', 'o']</code></p>
+				<br/>
+				<h3 id="char">lang.Char</h3>
+				<p>needs: <code>nothing</code>.</p>
+				<p><code>Text -- toText()</code></p>
+				<p>&nbsp;&nbsp; Return the char as text. Example: <code>\n.toText(); // "\n"s</code></p>
+				<p><code>Text -- join(Text[])</code></p>
+				<p>&nbsp;&nbsp; Join together the list of texts by a glue Text. Example: <code>\n.join(["hey", "not cool"]); // "hey\nnot\ncool"</code></p>
+				<p><code>Char -- toUpper()</code></p>
+				<p>&nbsp;&nbsp; Get the uppercase equivalent of the char. Example: <code>"h".toUpper(); // "H"</code></p>
+				<p><code>Char -- toLower()</code></p>
+				<p>&nbsp;&nbsp; Get the lowercase equivalent of the char. Example: <code>"H".toLower(); // "h"</code></p>
+				<p><code>Bool -- isLower()</code></p>
+				<p>&nbsp;&nbsp; Check if a char is lowercase. Example: <code>"H".isLower(); // false</code></p>
+				<p><code>Bool -- isUpper()</code></p>
+				<p>&nbsp;&nbsp; Check if a char is uppercase. Example: <code>"H".isUpper(); // true</code></p>
+				<p><code>Bool -- isAlpha()</code></p>
+				<p>&nbsp;&nbsp; Check if a char is an alphabet character. Example: <code>"H".isAlpha(); // true</code></p>
+				<p><code>Bool -- isDigit()</code></p>
+				<p>&nbsp;&nbsp; Check if a char is a digit numeral. Example: <code>"1".isDigit(); // true</code></p>
 				<br/>
 				<h3 id="bool">lang.Bool</h3>
 				<p>needs: <code>nothing</code>.</p>
-				<p><code>Text -- toString()</code></p>
-				<p>&nbsp;&nbsp; Convert a Bool into its Text equivalet. Example: <code>true.toString(); // "true"</code></p>
+				<p><code>Text -- toText()</code></p>
+				<p>&nbsp;&nbsp; Convert a Bool into its Text equivalet. Example: <code>true.toText(); // "true"</code></p>
 				<br/>
 				<h3 id="list">lang.List{T}</h3>
 				<p>needs: <code>nothing</code>.</p>
 				<p>List{T} is the autoboxed form of with T[]. Due to special semantics the other autoboxed classes don't have, you should for the moment avoid using List{T} and stick with T[] instead.</p>
-				<p><code>Num -- getSize()</code></p>
+				<p><code>Int -- getSize()</code></p>
 				<p>&nbsp;&nbsp; Count the elements in the list. Example: <code>[1, 2].getSize(); // 2</code></p>
 				<p><code>Bool -- contains(T)</code></p>
 				<p>&nbsp;&nbsp; Check if a particular element exists within a List. Example: <code>[1, 2].contains(2); // true</code></p>
 				<p><code>T[] -- intersect(T[])</code></p>
 				<p>&nbsp;&nbsp; Keep all elements that exist in both the target List and T[]. Example: <code>[1, 2, 3].intersect([2, 3, 4]); // [2, 3]</code></p>
 				<p><code>push(T)</code></p>
-				<p>&nbsp;&nbsp; Add an item to the end of a List. Example: <code>Num[].push(2);</code></p>
+				<p>&nbsp;&nbsp; Add an item to the end of a List. Example: <code>Int[].push(2);</code></p>
 				<p><code>T[] -- filter(Bool -- fn(T))</code></p>
-				<p>&nbsp;&nbsp; Use a closure to check each element, and keep only those that pass. Returns a copy of the list with only the selected elements. Example: <code>['hey', 'man'].filter({ t -> return t == 'man'; }); // ['man']</code></p>
-				<p><code>sort(Num -- fn(T, T))</code></p>
-				<p>&nbsp;&nbsp; Sort the items in a list with a comparator. Return -1, 0, or 1 to denote orders. <code>[1, 2].any({ a, b -> return -1 if a &lt; b else 1; }); // [2, 1]</code></p>
+				<p>&nbsp;&nbsp; Use a closure to check each element, and keep only those that pass. Returns a copy of the list with only the selected elements. Example: <code>['hey', 'man'].filter({ t -&gt; return t == 'man'; }); // ['man']</code></p>
+				<p><code>sort(Int -- fn(T, T))</code></p>
+				<p>&nbsp;&nbsp; Sort the items in a list with a comparator. Return -1, 0, or 1 to denote orders. <code>[1, 2].any({ a, b -&gt; return -1 if a &lt; b else 1; }); // [2, 1]</code></p>
 				<p><code>Bool -- any(Bool -- fn(T))</code></p>
-				<p>&nbsp;&nbsp; Like filter, but rather than copying the list, simply find if any items match. Stops at the first match. Example: <code>['hey', 'man'].any({ t -> return t == 'man'; }); // true</code></p>
+				<p>&nbsp;&nbsp; Like filter, but rather than copying the list, simply find if any items match. Stops at the first match. Example: <code>['hey', 'man'].any({ t -&gt; return t == 'man'; }); // true</code></p>
 				<p><code>{R} R[] -- map(R -- fn(T))</code></p>
-				<p>&nbsp;&nbsp; For every item in the list, process it into a new value (maybe even new type). Returns the list of values you created. <code>['hey', 'man!'].map({ t -> return t.getSize(); }); // [3, 4]</code></p>
+				<p>&nbsp;&nbsp; For every item in the list, process it into a new value (maybe even new type). Returns the list of values you created. <code>['hey', 'man!'].map({ t -&gt; return t.getSize(); }); // [3, 4]</code></p>
 				<p><code>T -- reduce(T -- fn(T, T))</code></p>
-				<p>&nbsp;&nbsp; Requires at least one item in the list. If only one, return it. Otherwise use the first item as a 'accumulator', then from item 2 to the end, pass the next item and the accumulator into the function, and use the result as the next accumulator. <code>['hey', 'man'].reduce({ a, b -> return a + ' ' + b }); // 'hey man'</code></p>
+				<p>&nbsp;&nbsp; Requires at least one item in the list. If only one, return it. Otherwise use the first item as a 'accumulator', then from item 2 to the end, pass the next item and the accumulator into the function, and use the result as the next accumulator. <code>['hey', 'man'].reduce({ a, b -&gt; return a + ' ' + b }); // 'hey man'</code></p>
 				<p><code>{R} R -- foldr(R -- fn(T, R), R acc)</code></p>
-				<p>&nbsp;&nbsp; Like reduce. However, you specify the starting accumulator and it can be of any type. Use this when your result is not the same type as your list. <code>['hey', 'man'].foldr({ t, acc -> return acc + t.getSize(); }, 0); // 6</code></p>
+				<p>&nbsp;&nbsp; Like reduce. However, you specify the starting accumulator and it can be of any type. Use this when your result is not the same type as your list. <code>['hey', 'man'].foldr({ t, acc -&gt; return acc + t.getSize(); }, 0); // 6</code></p>
 				<p><code>{R} R -- foldl(R -- fn(T, R), R acc)</code></p>
-				<p>&nbsp;&nbsp; Like foldr, but where foldr operates on elements from left to right, foldl operates right to left. <code>['hey', 'man!'].foldl({ t, acc -> return acc / t.getSize(); }, 24); // 2</code></p>
+				<p>&nbsp;&nbsp; Like foldr, but where foldr operates on elements from left to right, foldl operates right to left. <code>['hey', 'man!'].foldl({ t, acc -&gt; return acc / t.getSize(); }, 24); // 2</code></p>
 				<br />
 				<h3 id="exception">lang.Exception</h3>
 				<p>needs: <code>nothing</code>.</p>
@@ -164,10 +213,18 @@
 				<p>&nbsp;&nbsp; Print the text and no newline afterwards. Example: <code>Printer.print("hello");</code></p>
 				<p><code>printLine(Text)</code></p>
 				<p>&nbsp;&nbsp; Print the text and a newline afterwards. Example: <code>Printer.printLine("hello");</code></p>
+				<p><code>print(Int)</code></p>
+				<p>&nbsp;&nbsp; Print the integer and no newline afterwards. Example: <code>Printer.print(5);</code></p>
+				<p><code>printLine(Int)</code></p>
+				<p>&nbsp;&nbsp; Print the integer and a newline afterwards. Example: <code>Printer.printLine(5);</code></p>
 				<p><code>print(Num)</code></p>
-				<p>&nbsp;&nbsp; Print the number and no newline afterwards. Example: <code>Printer.print(5);</code></p>
+				<p>&nbsp;&nbsp; Print the number and no newline afterwards. Example: <code>Printer.print(5.2);</code></p>
 				<p><code>printLine(Num)</code></p>
-				<p>&nbsp;&nbsp; Print the number and a newline afterwards. Example: <code>Printer.printLine(5);</code></p>
+				<p>&nbsp;&nbsp; Print the number and a newline afterwards. Example: <code>Printer.printLine(5.2);</code></p>
+				<p><code>print(Char)</code></p>
+				<p>&nbsp;&nbsp; Print the character and no newline afterwards. Example: <code>Printer.print('.');</code></p>
+				<p><code>printLine(Char)</code></p>
+				<p>&nbsp;&nbsp; Print the character and a newline afterwards. Example: <code>Printer.printLine('.');</code></p>
 				<br />
 				<h3 id="FileSystem">io.FileSystem</h3>
 				<p><code>FilePath -- getPath(Text)</code></p>
@@ -207,17 +264,19 @@
 				<p>needs: <code>io.FilePath</code>.</p>
 				<p><code>FilePath -- getPath()</code></p>
 				<p>&nbsp;&nbsp; Get the object representation of the path to this file. Example: <code>File.getPath().getBasename();</code></p>
-				<p><code>Text -- read(Num)</code></p>
-				<p>&nbsp;&nbsp; Read Num characters from the file at the current point of the cursor. </p>
-				<p><code>Text -- readUnsignedChar()</code></p>
+				<p><code>Text -- read(Int)</code></p>
+				<p>&nbsp;&nbsp; Read Int characters from the file at the current point of the cursor. </p>
+				<p><code>Int -- readUnsignedChar()</code></p>
 				<p>&nbsp;&nbsp; Read a byte of the file as a binary, from value 0-255. </p>
 				<p><code>write(Text)</code></p>
-				<p>&nbsp;&nbsp; Write a string into a file at the current point of the cursor. </p>
+				<p>&nbsp;&nbsp; Write a Text into a file at the current point of the cursor. </p>
+				<p><code>write(Char)</code></p>
+				<p>&nbsp;&nbsp; Write a Char into a file at the current point of the cursor. </p>
 				<p><code>close()</code></p>
 				<p>&nbsp;&nbsp; Close the file. At the moment subsequent writes or reads will crash your program. Later it will throw an exception. </p>
-				<p><code>Num -- tell()</code></p>
+				<p><code>Int -- tell()</code></p>
 				<p>&nbsp;&nbsp; Get the current position of the read/write cursor position in the file. </p>
-				<p><code>seek(Num)</code></p>
+				<p><code>seek(Int)</code></p>
 				<p>&nbsp;&nbsp; Set the current position of the read/write cursor position in the file. </p>
 				<p><code>Bool -- eof()</code></p>
 				<p>&nbsp;&nbsp; Check if the cursor position is at the end of the file. </p>
@@ -229,14 +288,16 @@
 				<br />
 				<h3 id="System">std.System</h3>
 				<p>needs: <code>nothing</code>.</p>
-				<p><code>exit(Num)</code></p>
+				<p><code>exit(Int)</code></p>
 				<p>&nbsp;&nbsp; Exit program with a return code. By convention, a non-zero exit value is considered an error. Example: <code>System.exit(0);</code></p>
+				<p><code>execAsync(Text, fn(Text))</code></p>
+				<p>&nbsp;&nbsp; Run a shell command on the system asynchronously (synchronous support coming soon), and pass in a callback to handle its std output. Example: <code>System.execAsync("ls -l", { t -&gt; Printer.print(t); });</code></p>
 				<br />
 				<h3 id="undefinedindexexception">std.UndefindIndexException</h3>
 				<p>a <code>std.Exception</code>.</p>
 				<p>needs: <code>nothing</code>.</p>
 				<p>Exceptions thrown from unsafe array accesses throw an instance of this class. It is mostly a standard exception, but it has one extra public field you can use in your code.</p>
-				<p><code>with public Num index;</code></p>
+				<p><code>with public Int index;</code></p>
 				<p>You can code against this exact missing index with this public property.</p>
 				</div>
 			</div>

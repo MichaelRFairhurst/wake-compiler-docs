@@ -27,6 +27,7 @@
 			<hr />
 			<ul class="nav nav-tabs nav-stacked">
 				<li><a href="#v0.2.0">0.2.0 alpha</a></li>
+				<li><a href="#v0.2.1">0.2.1 alpha</a></li>
 				<li><a href="#v0.1.1">0.1.1 alpha</a></li>
 				<li><a href="#v0.1.0">0.1.0 alpha</a></li>
 				<li><a href="#v0.0.6">0.0.6 alpha</a></li>
@@ -47,6 +48,29 @@
 				<h1>Changelog</h1>
 				<p>We're still in alpha status, but you can check here to see what you'll get by updating, and/or gauge our progress.</p>
 				<br/>
+
+				<h3 id="v0.2.1">v0.2.1</h3>
+				<p><b>Features</b><p>
+				<p>Type inference in var declarations</p>
+				<p>Removed necessity of parens in if, while, foreach statements</p>
+				<p>foreach at support</p>
+				<p>Int class</p>
+				<p>Char class</p>
+				<p>Recursive import support</p>
+				<p>Dependency gathering with <code>-e</code> compile flag</p>
+				<p>Compile multiple wake files at once</p>
+				<p><b>Bugfixes</b><p>
+				<p>Fix error in wrapping exceptions in the wrong type.</p>
+				<p>Fixed typedef causing errors when compiling on older versions of gcc</p>
+				<p>Fixed undefined behavior caused during module import phase (no known bugs from this before the fix)</p>
+				<p>(seed) Removed md5 in builds, which caused errors on older versions of make</p>
+				<p><b>Standard Library</b><p>
+				<p>Int class</p>
+				<p>Char class</p>
+				<p>System.execAsync()</p>
+				<p><b>Compatibility Notes</b><p>
+				<p>Standard library and bulid tools are not backwards compatible. If you are using the seed project you must rm -rf libs, merge in the latest seed, and rebuild.</p>
+				<p>Many APIs and type rules changed from Text to Char or from Num to Int. You may have to find and fix all these places to successfully recompile.</p>
 
 				<h3 id="v0.2.0">v0.2.0</h3>
 				<p><b>Features</b><p>

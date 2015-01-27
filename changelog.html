@@ -26,6 +26,8 @@
 			</ul>
 			<hr />
 			<ul class="nav nav-tabs nav-stacked">
+				<li><a href="#v0.0.7">0.0.7 alpha</a></li>
+				<li><a href="#v0.0.6">0.0.6 alpha</a></li>
 				<li><a href="#v0.0.5">0.0.5 alpha</a></li>
 				<li><a href="#v0.0.4">0.0.4 alpha</a></li>
 				<li><a href="#v0.0.3">0.0.3 alpha</a></li>
@@ -47,6 +49,22 @@
 				<h1>Changelog</h1>
 				<p>We're still in alpha status, but you can check here to see what you'll get by updating, and/or gauge our progress.</p>
 				<br/>
+
+				<h3 id="v0.0.7">v0.0.7</h3>
+				<p><b>Features</b><p>
+				<p>Annotations (types not yet checked)</p>
+				<p>First standard tool for generating javascript interfaces, based on annotations</p>
+				<p>Typesafe <code>.?</code> operator for getting properties and calling methods on optionals</p>
+				<p>Typesafe <code>[?x]</code> operator for getting items out of lists as optionals, to avoid <code>UndefinedIndeException</code>s</p>
+				<p>Anonymous function declarations (closures)</p>
+				<p>Type inference on closure return types</p>
+				<p>Type inference on closure arguments when passed into functions</p>
+				<p>Non-overloaded functions print type errors by argument instead of reporting no overloading match</p>
+				<p><b>Bugfixes</b><p>
+				<p>Fixed issue where using the result of a void method warned about using the wrong <code>=</code> operator.</p>
+				<p>Implemented requirement for function vars to be aliased, previously caused undefined behavior.</p>
+				<p><b>Compatibility Notes</b><p>
+				<p>New, more typesafe AST driving new features. Should lead to fewer bugs but might have introduced a couple rogue ones.</p>
 
 				<h3 id="v0.0.6">v0.0.6</h3>
 				<p><b>Features</b><p>

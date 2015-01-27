@@ -114,6 +114,20 @@
 					margin-bottom: -25px;
 					margin-top: -25px;
 				}
+
+				.done {
+					opacity: 0.4;
+					filter: url("blur.svg#gaussian_blur");
+				}
+
+				h3.complete {
+					color: red;
+					font-size: 16px;
+					position: relative;
+					text-align: center;
+					text-shadow: 1px 1px 4px black;
+					top: 145px;
+				}
 			</style>
 
 			<h1>Wake Development Roadmap</h1>
@@ -241,13 +255,15 @@
 
 			<div class="clearfix">
 				<div class="rm-c rm-c1">
-					<h3>ready to develop</h3>
-					<div class="rm-i">
+					<h3>&nbsp;</h3>
+					<h3 class="complete">complete</h3>
+					<div class="rm-i done">
 						<h4>Decide Anonymous Function Syntax (<a href="https://github.com/MichaelRFairhurst/wake-compiler/issues/83">#83</a>)</h4>
 						<p>The ability to annotate provisions, so that you can annotate them with a javascript method name.</p>
 					</div>
-					<div class="rm-slant-straight"></div>
+					<div class="rm-slant-straight done"></div>
 					<div class="rm-i flagship">
+						<h3>ready to develop</h3>
 						<h4>Code gen and semantics for anonymous functions</h4>
 						<p>Implement the parsing, then the semantics, then the code gen in that order.</p>
 					</div>
@@ -262,16 +278,18 @@
 
 				<div class="rm-c rm-c2">
 					<div class="rm-spacer"></div>
-					<h3>ready to develop</h3>
-					<div class="rm-i">
+					<h3>&nbsp;</h3>
+					<h3 class="complete">complete</h3>
+					<div class="rm-i done">
 						<h4>Anonymous Function Typechecking (<a href="https://github.com/MichaelRFairhurst/wake-compiler/issues/84">#84</a>)</h4>
 						<p>Proper analysis of reassigning functions to subtypes of functions and/or making arrays of subtly different lambdas are all critical to have right.</p>
 					</div>
-					<div class="rm-slant-right"></div>
-					<div class="rm-slant-left"></div>
-					<div class="rm-slant-straight"></div>
+					<div class="rm-slant-right done"></div>
+					<div class="rm-slant-left done"></div>
+					<div class="rm-slant-straight done"></div>
 
 					<div class="rm-i">
+						<h3>ready to develop</h3>
 						<h4>Provide anonymous functions</h4>
 						<p>Providers currently can only provide classes and primitives, need to provide these lambdas once we can define them.</p>
 					</div>

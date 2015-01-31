@@ -61,6 +61,7 @@
 				<li><a href="#invoking">- Invoking Methods</a></li>
 				<li><a href="#overloading">- Overloading Methods</a></li>
 				<li><a href="#generics">Generics</a></li>
+				<li><a href="#genericmethods">- Generics Methods</a></li>
 				<li><a href="#provisions">Provisions</a></li>
 				<li><a href="#plainprovisions">- Plain Provisions</a></li>
 				<li><a href="#specializedprovisions">- Specialized Provisions</a></li>
@@ -103,7 +104,7 @@
 				<li><a href="#methods">Valid method names &amp; APIs</a></li>
 				<li><a href="#classes">Using classes</a></li>
 				<li><a href="#provisions">Tell me about provisions</a></li>
-				<li><a href="#entry">Where does the program begin?</a></li>
+				<li><a href="#closures">Take a look at our closures</a></li>
 				<li><a href="#entry">Where does the program begin?</a></li>
 			</ul>
 			<div class="row">
@@ -642,6 +643,15 @@ every SubClass (<span class="goodcode" title="Subclass extends BaseClass, meanin
     Num -- get() {
         return CalculationCache.getValue();
     }</code></pre>
+		<h3 id="#genericmethods">Generic Methods <span class="label label-inverse">flexible</span> <span class="label label-inverse">typesafe</span> <span class="label label-inverse">concise</span></h3>
+		<p>While generic methods don't create any features that couldn't be accomplished with generic classes, they reduce boilerplate in certain one-shot operations that have generic qualities. For instance, making your own function that checks a list's length.</p>
+		<pre><code class="wake"
+>every ListAsserts is:
+
+    <span class="goodcode" title="Declare this a generic method. You can name multiple generic types. In this case we declare just T.">{T}</span> that(<span class="goodcode" title="Accept a list of Ts, no matter what T is.">T[]</span>)HasLength(Num) {...}
+
+    <span class="goodcode" title="Declare this a generic method. You can name multiple generic types. In this case we declare just T.">{T}</span> that(<span class="goodcode" title="Accept a list of Ts, no matter what T is.">T[]</span>)Matches(<span class="goodcode" title="Once again, accept a list of anything. However, this must be a list of the same thing that our other argument in, since they both share the name T.">T[]</span>) {...}</code></pre>
+		<p>Calling this generic method looks just like normal: <code>ListAsserts.that([5,6])HasLength(2)</code>. Note that you can have multiple comma separated generic types. Also note that in the second example there are two usages of <code>T</code>; these must match at call time or the compiler will reject your program.</p>
 		<hr />
 		<h1 id="provisions">Provisions <span class="label label-inverse">flexible</span> <span class="label label-inverse">testable</span> <span class="label label-inverse">typesafe</span></h1>
 		<p>Testability was a huge goal of Wake's design. We were inspired by dependency injection frameworks to make a faster, typesafe means of binding dependencies to behavior. What we came up with is provisions.</p>
@@ -750,8 +760,8 @@ every PersonProvider is:
 		<pre><code class="wake"
 >every ListSorter is:
 
-    sort(List{Num}) {
-        List.sort({ <span class="goodcode" title="Declare two arguments to this function, Num and $Num">Num, $Num</span> <span class="goodcode" title="A dashrocket separates arguments from the closure body">-&gt;</span> <span class="Here the body of the function goes">return Num &lt; $Num;</span> });
+    sort(Num[]) {
+        Num[].sort({ <span class="goodcode" title="Declare two arguments to this function, Num and $Num">Num, $Num</span> <span class="goodcode" title="A dashrocket separates arguments from the closure body">-&gt;</span> <span class="Here the body of the function goes">return Num &lt; $Num;</span> });
     }</code></pre>
 
 		<h3 id="astypes">As Types <span class="label label-inverse">readable</span> <span class="label label-inverse">typesafe</span></h3>

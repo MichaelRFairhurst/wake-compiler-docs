@@ -79,17 +79,22 @@ if($code) {
 		<form method="POST">
 		<div class="row">
 			<div class="span12">
-				<textarea style="width:100%; height:300px" name="Code"><?php if($code): echo $code; else: ?>
+				<textarea style="width:100%; height:300px; font-family: monospace" name="Code"><?php if($code): echo $code; else: ?>
 import Printer;
 
 every Main is:
 
-	needs Printer;
+    needs Printer;
 
-	main() {
-		Printer.printLine('Hello World!');
-	}
-				<?php endif; ?></textarea>
+    main() {
+        var Text[] = ['Hello', 'Old', 'World!'].map({
+            t -> return 'New' if t == 'Old' else t;
+        });
+
+        Printer.printLine(' '.join(Text[]));
+    }<?php
+
+			endif; ?></textarea>
 			</div>
 		</div>
 		<div class="row">

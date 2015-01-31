@@ -26,7 +26,7 @@
 			</ul>
 			<hr />
 			<ul class="nav nav-tabs nav-stacked">
-				<li><a href="#v0.0.7">0.0.7 alpha</a></li>
+				<li><a href="#v0.1.0">0.1.0 alpha</a></li>
 				<li><a href="#v0.0.6">0.0.6 alpha</a></li>
 				<li><a href="#v0.0.5">0.0.5 alpha</a></li>
 				<li><a href="#v0.0.4">0.0.4 alpha</a></li>
@@ -50,7 +50,7 @@
 				<p>We're still in alpha status, but you can check here to see what you'll get by updating, and/or gauge our progress.</p>
 				<br/>
 
-				<h3 id="v0.0.7">v0.0.7</h3>
+				<h3 id="v0.1.0">v0.1.0</h3>
 				<p><b>Features</b><p>
 				<p>Annotations (types not yet checked)</p>
 				<p>First standard tool for generating javascript interfaces, based on annotations</p>
@@ -59,12 +59,26 @@
 				<p>Anonymous function declarations (closures)</p>
 				<p>Type inference on closure return types</p>
 				<p>Type inference on closure arguments when passed into functions</p>
-				<p>Non-overloaded functions print type errors by argument instead of reporting no overloading match</p>
+				<p>Generic methods, declaring and invoking</p>
+				<p>Smart type inference in the presence of generic methods -- typecheck all arguments before lambdas, so that lambda type-inference can benefit from as many bound parameters as possible.</p>
+				<p>Non-overloaded functions print type errors by argument instead of reporting 'no overloading match', which is a clearer error.</p>
+				<p><b>Standard Library</b><p>
+				<p>List.filter()</p>
+				<p>List.sort()</p>
+				<p>List.map()</p>
+				<p>List.any()</p>
+				<p>List.reduce()</p>
+				<p>List.foldl()</p>
+				<p>List.foldr()</p>
 				<p><b>Bugfixes</b><p>
 				<p>Fixed issue where using the result of a void method warned about using the wrong <code>=</code> operator.</p>
 				<p>Implemented requirement for function vars to be aliased, previously caused undefined behavior.</p>
+				<p>Detect and reject repeated generics, ie, <code>every MyClass{T, T, T} is</code></p>
 				<p><b>Compatibility Notes</b><p>
 				<p>New, more typesafe AST driving new features. Should lead to fewer bugs but might have introduced a couple rogue ones.</p>
+				<p>New libraries are not compatible with v0.0.6, since there is a new type flag for generic method parameters. Update your libs and tools. However, v0.1.0 can read table files created by v0.0.6</p>
+
+				<hr/>
 
 				<h3 id="v0.0.6">v0.0.6</h3>
 				<p><b>Features</b><p>

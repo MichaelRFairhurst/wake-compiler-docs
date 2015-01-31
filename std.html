@@ -126,6 +126,20 @@
 				<p>&nbsp;&nbsp; Keep all elements that exist in both the target List and T[]. Example: <code>[1, 2, 3].intersect([2, 3, 4]); // [2, 3]</code></p>
 				<p><code>push(T)</code></p>
 				<p>&nbsp;&nbsp; Add an item to the end of a List. Example: <code>Num[].push(2);</code></p>
+				<p><code>T[] -- filter(Bool -- fn(T))</code></p>
+				<p>&nbsp;&nbsp; Use a closure to check each element, and keep only those that pass. Returns a copy of the list with only the selected elements. Example: <code>['hey', 'man'].filter({ t -> return t == 'man'; }); // ['man']</code></p>
+				<p><code>sort(Num -- fn(T, T))</code></p>
+				<p>&nbsp;&nbsp; Sort the items in a list with a comparator. Return -1, 0, or 1 to denote orders. <code>[1, 2].any({ a, b -> return -1 if a &lt; b else 1; }); // [2, 1]</code></p>
+				<p><code>Bool -- any(Bool -- fn(T))</code></p>
+				<p>&nbsp;&nbsp; Like filter, but rather than copying the list, simply find if any items match. Stops at the first match. Example: <code>['hey', 'man'].any({ t -> return t == 'man'; }); // true</code></p>
+				<p><code>{R} R[] -- map(R -- fn(T))</code></p>
+				<p>&nbsp;&nbsp; For every item in the list, process it into a new value (maybe even new type). Returns the list of values you created. <code>['hey', 'man!'].map({ t -> return t.getSize(); }); // [3, 4]</code></p>
+				<p><code>T -- reduce(T -- fn(T, T))</code></p>
+				<p>&nbsp;&nbsp; Requires at least one item in the list. If only one, return it. Otherwise use the first item as a 'accumulator', then from item 2 to the end, pass the next item and the accumulator into the function, and use the result as the next accumulator. <code>['hey', 'man'].reduce({ a, b -> return a + ' ' + b }); // 'hey man'</code></p>
+				<p><code>{R} R -- foldr(R -- fn(T, R), R acc)</code></p>
+				<p>&nbsp;&nbsp; Like reduce. However, you specify the starting accumulator and it can be of any type. Use this when your result is not the same type as your list. <code>['hey', 'man'].foldr({ t, acc -> return acc + t.getSize(); }, 0); // 6</code></p>
+				<p><code>{R} R -- foldl(R -- fn(T, R), R acc)</code></p>
+				<p>&nbsp;&nbsp; Like foldr, but where foldr operates on elements from left to right, foldl operates right to left. <code>['hey', 'man!'].foldl({ t, acc -> return acc / t.getSize(); }, 24); // 2</code></p>
 				<br />
 				<h3 id="Map">Map{K,V}</h3>
 				<p>needs: <code>nothing</code>.</p>

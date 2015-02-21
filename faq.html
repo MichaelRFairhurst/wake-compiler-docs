@@ -29,6 +29,7 @@
 				<li><a href="#/varnames-optional">Why aren't variable names required?</a></li>
 				<li><a href="#/varnames-first-second">Why don't variables always follow the type?</a></li>
 				<li><a href="#/classdeclaration">What's with the unique class declarations?</a></li>
+				<li><a href="#/inheritancetypes">Why are there these two wierd types of inheritance?</a></li>
 			</ul>
 		</div>
 		<div class="opennav"><button class="btn btn-inverse btn-small"><i class="icon-align-justify icon-white"></i></button></div>
@@ -64,6 +65,9 @@
 			<p>Secondly, indentation is valuable. By wrapping your entire class in a bracket encourages you to indent everything else in the file. This is a waste of indentation, brought on mostly by a likeness to features that require indentation such as methods, if statements, and more.</p>
 			<p>Thirdly, extra closing brackets in your methods will get accepted by parsers as the end of your class declaration. Depending on the language, the parser will report an error on the opening of the next method, or the extra closing bracket at the end of the file. We thought it important that the parse error is reported as close as possible to the source, which in Wake will usually be the end of the method that contains the extra bracket.</p>
 
+			<h3 id="classdeclaration">Why are there these two wierd types of inheritance; <code>a ParentClass</code> vs <code>capable ParentClass</code>?</h3>
+			<p>This is a strange idea to some people. The concern is that you can no longer make interfaces, or, for dynamic programmers who haven't used interfaces, that the second type of inheritance is useless. Interfaces are more flexible than classes, because they have sane effects in mutiple inheritance, due to how interfaces don't share behavior.</p>
+			<p>Rather than write an interface for a component, <code>MyComponent</code>, and then a class that implements it, <code>MyComponentImpl</code>, for every class you write, Wake lets you simply write <code>MyComponent</code>, and then use it as an interface anywhere in your code. Alternatively, you can simply leave the <code>MyComponent</code> class with abstract methods if you wish to accomplish the same effect as creating an interface.</p>
 		</div>
 		</div>
 

@@ -77,6 +77,8 @@
 				<li><a href="#enclosing">- Enclosing Local Vars</a></li>
 				<li><a href="#ternaries">Ternary Operators</a></li>
 				<li><a href="#annotations">Annotations</a></li>
+				<li><a href="#unittests">Unit tests</a></li>
+				<li><a href="#mocks">Mocks</a></li>
 				<li><a href="#entry">Program entry points</a></li>
 			</ul>
 		</div>
@@ -106,6 +108,7 @@
 				<li><a href="#provisions">Tell me about provisions</a></li>
 				<li><a href="#closures">Take a look at our closures</a></li>
 				<li><a href="#entry">Where does the program begin?</a></li>
+				<li><a href="#unittests">How do I write tests?</a></li>
 			</ul>
 			<div class="row">
 				<div class="span6">
@@ -928,6 +931,41 @@ every MyClass
     testSomething(Asserts) {
         // ...
     };</code></pre>
+		<h1 id="unittests">Unit tests</h1>
+		<p>While there are many ways to write unit tests in Wake, the current standard way is to use <a href="https://github.com/MichaelRFairhurst/wUnit">wUnit</a> with the mocking framework <a href="https://github.com/MichaelRFairhurst/wockito">wockito</a>. If your project is based on the <a href="https://github.com/MichaelRFairhurst/wockito">wake project seed</a>, then these are hooked up into your build for you already.</p>
+		<p>Simply create a wake file inside the <code>test/</code> directory, and you can use <a href="#annotations">Annotations</a> to mark your tests.</p>
+		<pre><code class="wake"
+>import Asserts;
+<span class="goodcode" title="Import the class you are testing">import SqrRoot;</span>
+
+<span class="goodcode" title="Annotate which classes in your test directory actually are tests. Other files can be created to be used in tests without confusing them.">@TestClass</span>
+every SqrRootTest is:
+
+    <span class="goodcode" title="Use dependency injection to get an instance of the class we are testing">needs SqrRoot;</span>
+
+    @Test
+    testSquareRootOfSixteen(<span class="badcode" title="Due to the creation of wUnit before Wake had exceptions, Asserts is passed into each test to track which failures belong where. In the next version of wUnit you will be able to simply 'need Asserts' and skip this argument, as failed assertions will simply throw exceptions.">Asserts</span>) {
+        <span class="goodcode" title="Run an assertion">Asserts.that(SqrRoot.of(16))Equals(4);</span>
+    }</code></pre>
+		<h3 id="mocks">Mocks</h3>
+
+		<p>If you need to create a new SqrRoot in each of your tests, you can use <a href="#provisions">provisions</a> to accomplish this. Similarly, you can inject mocks via wockito by use of the same feature. Say, for instance, we are testing that our 'Hello World' app actually prints 'Hello World!'. We could run the program and read its output, but that is not scalable, so Wake guarantees you always have the option to use mocks instead.</p>
+		<pre><code class="wake"
+>@TestClass
+every MainTest is:
+
+    <span class="goodcode" title="Get wockito's MockProvider for using mocks in this test class.">needs MockProvider mocks;</span>
+    <span class="goodcode" title="Get and store a MockPrinter. This will be injected into Main, and available for you to set up & verify expectations.">with MockPrinter from mocks;</span>
+    provides <span class="goodcode" title="Provide our own Main so we can mock out the Printer it needs.">Main</span>, <span class="goodcode" title="Provide our MockPrinter, via the Printer type so that its injected inside our Main.">Printer &lt;- { return MockPrinter; };</span>
+
+    @Test
+    <span class="goodcode" title="Use these freeform method names to create excellently named tests">~[ test Main.main() prints Hello World ]~</span>(Asserts) {
+        <span class="badcode" title="This is another lingering annoyance from before Wake had exception support. This statement will not be necessary in the next version of Wockito.">mocks.use(Asserts);</span>
+        mocks.<span class="goodcode" title="Stub a return value. Now MockPrinter.getWrittenCharacterCount() will return 20.">when(MockPrinter).getWrittenCharacterCount().thenReturn(20);</span>
+        <span class="goodcode" title="Get our Main with the injected MockPrinter.">var Main from this;</span>
+        Main.main();
+        mocks.<span class="goodcode" title="Verify that the method printLine with the value 'Hello World' has been called on PrinterMock.">verify(MockPrinter).printLine("Hello World!");</span>
+    }</code></pre>
 
 		<h3 id="entry">Program Entry Points <span class="label label-inverse">flexible</span> <span class="label label-inverse">testable</span> <span class="label label-inverse">fast</span></h3>
 		<p>After compiling each Wake file, you can link the files together and choose where the program begins. This means the code you write does not guarantee any particular entry point, which in turn means your test suite can have a different entry point than your app. Without this, you would be unable to test your application's startup in unit tests.</p>

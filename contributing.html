@@ -30,6 +30,7 @@
 				<li><a href="#building">Buiding the code</a></li>
 				<li><a href="#buildingtests">Running the tests</a></li>
 				<li><a href="#issues">Issues</a></li>
+				<li><a href="#example">How would I, say, add an operator?</a></li>
 				<li><a href="#sourcetypes">Source Types in the Compiler</a></li>
 				<li><a href="#trees">The Wake AST</a></li>
 				<li><a href="#typechecker">Standard type checking</a></li>
@@ -64,6 +65,8 @@
 			<h3 id="issues">Issues</h3>
 			<p>Now that you have the code and/or tests building, you can pick a bug or feature from the <a href="https://github.com/MichaelRFairhurst/wake-compiler/issues">Github issue tracker</a>, and get to work. Feel free to ask questions before settling on anything.</p>
 			<p>I also want to call out a few milestones and labels. There are different milestones for high vs low priority, and a bucket for all the features we'd like to include. High priority or feature push are a great starting place. For labels, there is a <a href="https://github.com/MichaelRFairhurst/wake-compiler/issues?q=is%3Aopen+is%3Aissue+label%3Abite-sized">bite-sized</a> label for small bugs/features that are great for first taking on. Additionally, semantics, parsing, and codegen have all been split out for those who are interested/more comfortable in one area vs another. The exception to this is the fullstack label, which indicates all of the above will be involved.</p>
+			<h3 id="example">How would I, say, add an operator?</h3>
+			<p>Many features in the compiler are fullstack, ie, they affect the lexer, parser, type checker, code generator, and of course need tests as well. Whether you are interested in working in all of these areas or a subset, here is an great example of a fullstack pull request <a href="https://github.com/MichaelRFairhurst/wake-compiler/pull/114">here</a>, which added bitwise operators <code>&</code>, <code>|</code>, <code>^</code>, <code>&lt;&lt;</code>, and <code>&gt;&gt;</code>. Notice how its not as intimidating as you'd think!</p>
 			<h3 id="sourcetypes">Source Types in the Compiler</h3>
 			<p>If you <code>ls src</code>, you'll see source types flex, bison, c, c++, and wake. The vast majority of the compiler lives in <code>src/cpp</code>. Why the others?</p>
 			<p><b>flex</b>: These files contain rules for lexical analysis of wake files. One is for lexing wake source, and the other is for lexing linkable files. Lexing is also called tokenization. Tokenization breaks the text into meaningful chunks, but does not attempt to put any of them in context.</p>

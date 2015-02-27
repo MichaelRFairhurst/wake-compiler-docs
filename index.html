@@ -53,6 +53,7 @@
 				<li><a href="#lists">- Using Lists</a></li>
 				<li><a href="#iterating">- Iterating over Lists</a></li>
 				<li><a href="#typesafelists">- Typesafe List Access</a></li>
+				<li><a href="#operators">Operators</a></li>
 				<li><a href="#classes">Classes</a></li>
 				<li><a href="#dependencies">- Dependencies</a></li>
 				<li><a href="#properties">- Properties</a></li>
@@ -566,6 +567,11 @@
         }
     }</code></pre>
 
+			<h3 id="operators">Operators in Wake <span class="label label-inverse">concise</span> <span class="label label-inverse">typesafe</span></h3>
+			<p>Operator precedence has been copied from Java. The new ones here are links to their usage descriptions.</p>
+			<p>Supported operators (in no particular order): <code>+</code>, <code>-</code>, <code>=</code>, <code>|</code>, <code>||</code>, <code>&amp;&amp;</code>, <code>/</code>, <code>*</code>, <a href="#optionalmethods"><code>.?</code></a>, <code>[ ]</code>, <code>^</code>, <a href="#typesafelists"><code>[? ]</code></a>, <code>.</code>, <code>!</code>, <code>&lt;&lt;</code>, <code>&gt;&gt;</code>, <code>&gt;</code>, <code>&lt;</code>, <code>:=</code>, <code>+=</code>, <code>-=</code>, <code>/=</code>, <code>*=</code>, <code>&lt;=</code>, <code>&gt;=</code>, <code>!=</code>, <code>==</code>.</p>
+			<p>Why does Wake support both <code>=</code> and <code>:=</code>? Both do the same thing, but <code>=</code> does not return a value. That means you cannot use <code>=</code> in the condition of an if-statement or a subexpression. To ensure you really intended <code>=</code> and not <code>==</code>, you must opt-in by using <code>:=</code>, which does return a value. This also stands out visually for others who later read your code.</p>
+			<p>Note that <code>^</code> is bitwise XOR and not an exponent.</p>
 			<h1 id="classes">Classes in Wake <span class="label label-inverse">concise</span> <span class="label label-inverse">readable</span></h1>
 			<p>Wake is a truly Object Oriented language, and should come with few surprises here.</p>
 			<p>In Wake, everything is an object. A class declaration begins with the keyword <code>every</code> as seen below. Within that definition can be properties, dependencies, a constructor, methods, and provisions.</p>
@@ -693,7 +699,7 @@ every SubClass (<span class="goodcode" title="Subclass extends BaseClass, meanin
     Num -- get() {
         return CalculationCache.getValue();
     }</code></pre>
-		<h3 id="#genericmethods">Generic Methods <span class="label label-inverse">flexible</span> <span class="label label-inverse">typesafe</span> <span class="label label-inverse">concise</span></h3>
+		<h3 id="genericmethods">Generic Methods <span class="label label-inverse">flexible</span> <span class="label label-inverse">typesafe</span> <span class="label label-inverse">concise</span></h3>
 		<p>While generic methods don't create any features that couldn't be accomplished with generic classes, they reduce boilerplate in certain one-shot operations that have generic qualities. For instance, making your own function that checks a list's length.</p>
 		<pre><code class="wake"
 >every ListAsserts is:

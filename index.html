@@ -116,16 +116,14 @@
 				<div class="span6">
 					<h3>Wake</h3>
 					<div class="alert alert-success" immovable>Code as concise as javascript, with inheritance and typesafety and more</div>
-					<span class="label label-info">Wake (510 bytes)</span>
+					<span class="label label-info">Wake (481 bytes)</span>
 					<pre><code class="wake"
 >every RecordValidator is:
 
     needs SessionHolder,
 
     Bool -- validate(Record[]) {
-        return Record[].any({
-            r -&gt; return !validate(r);
-        });
+        return Record[].any({ r =&gt; !validate(r) });
     }
 
     Bool -- validate(Record) {
@@ -134,12 +132,12 @@
 
         if Account[] exists {
             return Account[].any({
-                a -&gt; return SessionHolder.hasAccount(a);
+                a =&gt; SessionHolder.hasAccount(a)
             });
         }
 
         return Record.Revisions[].filter({
-            r -&gt; return usesLimits(r);
+            r =&gt; usesLimits(r)
         }).length &lt; 3;
     }
 
@@ -824,7 +822,8 @@ every PersonProvider is:
 >every ListSorter is:
 
     sort(Num[]) {
-        Num[].sort({ <span class="goodcode" title="Declare two arguments to this function, Num and $Num">Num, $Num</span> <span class="goodcode" title="A dashrocket separates arguments from the closure body">-&gt;</span> <span class="Here the body of the function goes">return Num &lt; $Num;</span> });
+        Num[].each({ <span class="goodcode" title="Declare one argument to this function, Num">Num</span> <span class="goodcode" title="A dashrocket separates arguments from the closure body">-&gt;</span> <span class="goodcode" title="Here the body of the function goes. You can have any type of statement in here: if statements, return statements, etc.">if(Num == ...) { ... }</span> });
+        Num[].sort({ <span class="goodcode" title="Declare two arguments to this function, Num and $Num">Num, $Num</span> <span class="goodcode" title="An equalsrocket saves you the hassle of writing return statements manually.">=&gt;</span> <span class="goodcode" title="Since we used =>, we put an expression instead of a statement, and can skip the ending semicolon">Num &lt; $Num</span> });
     }</code></pre>
 
 		<h3 id="astypes">As Types <span class="label label-inverse">readable</span> <span class="label label-inverse">typesafe</span></h3>
@@ -858,14 +857,12 @@ every PersonProvider is:
             <span class="goodcode" title="The return type is properly inferred as a boolean. If you have multiple return statements, they are properly unified, if possible.">return true;</span>
         });
 
-        Num[].sort({ <span class="goodcode" title="Since this is used as an argument that expects a function comparing two Nums, both of these arguments are inferred to be Nums.">a, b</span> -&gt;
-            return a &lt; b;
-        }
+        Num[].sort({ <span class="goodcode" title="Since this is used as an argument that expects a function comparing two Nums, both of these arguments are inferred to be Nums.">a, b</span> =&gt; a &lt; b });
     }</code></pre>
 
 		<h3 id="selfexecuting">Self Executing <span class="label label-inverse">flexible</span></h3>
 		<p>While functional programming takes the principle that "everything is an expression", Wake does not. What this means is that some constructs, such as loops, do not have values. This means you can't loop <i>within</i> an expression.</p>
-		<p>By using self executing closures, you can embed statements within an expression. Do note, however, that this is often a code smell.</p>
+		<p>By using self executing closures, you can embed statements within an expression. Do note, however, that this is often a code smell. There is nothing 'special' about self executing closures, from a language perspective, except that it requires parenthesis in the grammar.</p>
 		<p class="alert alert-error">Self executing functions within javascript are also often a sort of hack to create isolate scopes. This is not required in Wake, making self execution less common.</p>
 
 		<span class="label label-info">Wake</span>
@@ -895,9 +892,7 @@ every PersonProvider is:
     }
 
     <span class="goodcode" title="The cache we return is a function that returns text when given a Num.">Text -- fn(Num)</span> -- getCache() {
-        return { Num -&gt;
-            return <span class="goodcode" title="No matter where this function is passed or shared, cacheById will always reference this object's property">cacheById[Num];</span>
-        };
+        return { Num =&gt; <span class="goodcode" title="No matter where this function is passed or shared, cacheById will always reference this object's property">cacheById[Num]</span> };
     }</code></pre>
 
 		<h3 id="enclosing">Enclosing Local Vars <span class="label label-inverse">concise</span> <span class="label label-inverse">flexible</span> <span class="label label-inverse">typesafe</span></h3>

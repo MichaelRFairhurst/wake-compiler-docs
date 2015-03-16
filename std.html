@@ -100,7 +100,7 @@
 				<p><code>Text -- substr(Num start)</code></p>
 				<p>&nbsp;&nbsp; Cut from the character at the starting index until the end of the Text. A negative start index counts from the end of the Text. Example: <code>"Hello".substr(1); // "ello"</code></p>
 				<p><code>Text -- substr(Num start, Num end)</code></p>
-				<p>&nbsp;&nbsp; Cut from the character at the starting index until the ending index of the Text. A negative start or ending index counts from the end of the Text. Example: <code>"Hello".substr(1, 3); // "ell"</code></p>
+				<p>&nbsp;&nbsp; Cut from the character at the starting index until, but not including, the ending index of the Text. A negative start or ending index counts from the end of the Text. Example: <code>"Hello".substr(1, 3); // "ell"</code></p>
 				<p><code>Num? -- parseNum()</code></p>
 				<p>&nbsp;&nbsp; Read the Text as if it were a Num. If parsing fails, it will return nothing. Example: <code>"5.5".parseNum(); // 5.5</code></p>
 				<p><code>Text? -- charAt(Num)</code></p>

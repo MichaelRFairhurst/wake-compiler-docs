@@ -490,11 +490,11 @@
 
     Num? -- mayReturnAnNumAndAcceptsA(Num?) {
         <span class="goodcode" title="You can always assign a real type to an optional one.">Num = 5;</span>
-        <span class="goodcode" title="You can always set an optional type to Nothing.">Num = Nothing;</span>
-        <span class="goodcode" title="This checks if Num is not Nothing. Inside this block, Num is no longer an optional type.">if Num exists {</span>
+        <span class="goodcode" title="You can always set an optional type to nothing.">Num = nothing;</span>
+        <span class="goodcode" title="This checks if Num is not nothing. Inside this block, Num is no longer an optional type.">if Num exists {</span>
             return Num + 7;
         } else {
-            return Nothing;
+            return nothing;
         }
     }
 </code></pre>

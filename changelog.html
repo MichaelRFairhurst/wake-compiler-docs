@@ -26,6 +26,7 @@
 			</ul>
 			<hr />
 			<ul class="nav nav-tabs nav-stacked">
+				<li><a href="#v0.2.0">0.2.0 alpha</a></li>
 				<li><a href="#v0.1.1">0.1.1 alpha</a></li>
 				<li><a href="#v0.1.0">0.1.0 alpha</a></li>
 				<li><a href="#v0.0.6">0.0.6 alpha</a></li>
@@ -46,6 +47,28 @@
 				<h1>Changelog</h1>
 				<p>We're still in alpha status, but you can check here to see what you'll get by updating, and/or gauge our progress.</p>
 				<br/>
+
+				<h3 id="v0.2.0">v0.2.0</h3>
+				<p><b>Features</b><p>
+				<p>"is" keyword is now optional</p>
+				<p>Modules support</p>
+				<p>Bitwise operators</p>
+				<p>Modulo operators</p>
+				<p>Implicit lambda returns with <code>=></code></p>
+				<p>Complex number parsing</p>
+				<p>Unary - operator</p>
+				<p><b>Bugfixes</b><p>
+				<p>Fixed issue with codegen and ternary operators</p>
+				<p>Fixed integer precision issue</p>
+				<p>Fixed trigraph in a test according to clang</p>
+				<p>Fixed logical operators codegen not allowing short circuiting</p>
+				<p>Fixed issue compiling on old versions of yacc/bison</p>
+				<p><b>Standard Library</b><p>
+				<p>The standard library is now split into the modules <code>io</code>, <code>std</code>, and <code>lang</code>.</p>
+				<p>bugfix with File.getParent() returning nothing at moments that makes it unusable</p>
+				<p><b>Compatibility Notes</b><p>
+				<p>Table files are not backwards compatible. If you are using the seed project you must rm -rf libs, merge in the latest seed, and rebuild.</p>
+				<p>The standard library is now split into the modules <code>io</code>, <code>std</code>, and <code>lang</code>.</p>
 
 				<h3 id="v0.1.1">v0.1.1</h3>
 				<p><b>Bugfixes</b><p>

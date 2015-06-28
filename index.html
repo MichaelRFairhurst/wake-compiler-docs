@@ -59,6 +59,7 @@
 				<li><a href="#dependencies">- Dependencies</a></li>
 				<li><a href="#properties">- Properties</a></li>
 				<li><a href="#inheritance">- Inheritance</a></li>
+				<li><a href="#modules">Modules</a></li>
 				<li><a href="#methods">Methods</a></li>
 				<li><a href="#invoking">- Invoking Methods</a></li>
 				<li><a href="#overloading">- Overloading Methods</a></li>
@@ -631,6 +632,23 @@ every SubClass (<span class="goodcode" title="Subclass extends BaseClass, meanin
     <span class="goodcode" title="Running this method will output &quot;SubClass printing: BaseClass&quot;">useThisAsPrinter</span>() {
         <span class="goodcode" title="Use BaseClass.myMethod since SubClass is a BaseClass. You can also do this with parent.myMethod()">myMethod</span>(<span class="goodcode" title="We can send 'this' as the argument of myMethod(Printer) since SubClass is a capable Printer.">this</span>);
     }</code></pre>
+			<hr />
+			<h1 id="modules">Wake's Module System <span class="label label-inverse">concise</span> <span class="label label-inverse">readable</span></h1>
+			<div class="alert alert-error">
+				Wake does not yet support auto-imports for all classes within a package, like in Java. This is because cyclical imports are not quite just yet handled.
+			</div>
+			<p>Wake uses the keywords <code>module</code> and <code>import</code> to break code into modules. Modules are optional when you create your own code, but must be accurately specified during an import.</p>
+			<pre><code class="wake"
+>module example.module;
+
+import other.module.SomeClass;
+
+every ModuleExample is:
+    needs SomeClass;</code></pre>
+			<p>Modules must be lowercase. Once a class is imported from another (or the same) module, you can then refer to that class by its unqualified classname.</p>
+			<p>When this code is compiled, a table file will be created for this class and written to the location <code>${tabledir}/example.module/ModuleExample.table</code>.</p>
+			<p>If you are using the project seed, files are expected to exist in the <code>src/${modulename}</code> directory. In this case, the file should exist in the location <code>src/other.module.SomeClass.wk</code>.</p>
+			<p>Modules can be shared by handing out the directories <code>bin/wakeobj/{module}</code> and <code>bin/waketable/{module}</code>. If you are importing others' code with the wake project seed, you can make directories <code>lib/{module}/obj</code> and <code>lib/{module}/table</code> to begin using the third party wake sources in your project.</p>
 			<hr />
 			<h1 id="methods">Valid Methods in Wake <span class="label label-inverse">concise</span> <span class="label label-inverse">readable</span></h1>
 			<div class="alert alert-info">

@@ -27,17 +27,19 @@
 			<hr />
 			<ul class="nav nav-tabs nav-stacked">
 				<li><a href="#stdlib">Standard Library</a></li>
-				<li><a href="#num">- Num</a></li>
-				<li><a href="#text">- Text</a></li>
-				<li><a href="#bool">- Bool</a></li>
-				<li><a href="#list">- List</a></li>
-				<li><a href="#Map">- Map{K,V}</a></li>
-				<li><a href="#Printer">- Printer</a></li>
-				<li><a href="#FileSystem">- FileSystem</a></li>
-				<li><a href="#FilePath">- FilePath</a></li>
-				<li><a href="#File">- File</a></li>
-				<li><a href="#Argv">- Argv</a></li>
-				<li><a href="#System">- System</a></li>
+				<li><a href="#num">- lang.Num</a></li>
+				<li><a href="#text">- lang.Text</a></li>
+				<li><a href="#bool">- lang.Bool</a></li>
+				<li><a href="#list">- lang.List</a></li>
+				<li><a href="#exception">- lang.Exception</a></li>
+				<li><a href="#Map">- std.Map{K,V}</a></li>
+				<li><a href="#Printer">- io.Printer</a></li>
+				<li><a href="#FileSystem">- io.FileSystem</a></li>
+				<li><a href="#FilePath">- io.FilePath</a></li>
+				<li><a href="#File">- io.File</a></li>
+				<li><a href="#Argv">- std.Argv</a></li>
+				<li><a href="#System">- std.System</a></li>
+				<li><a href="#undefinedindexexception">- std.UndefinedIndexException</a></li>
 			</ul>
 		</div>
 		<div class="opennav"><button class="btn btn-inverse btn-small"><i class="icon-align-justify icon-white"></i></button></div>
@@ -49,8 +51,9 @@
 			</div>
 				<h1 id="stdlib">Standard Library</h1>
 				<p>There isn't much development on the standard library yet.</p>
+				<p>Note that classes in the <code>lang</code> module do not need to be imported.</p>
 				<br/>
-				<h3 id="num">Num</h3>
+				<h3 id="num">lang.Num</h3>
 				<p>needs: <code>nothing</code>.</p>
 				<p><code>Text -- toString()</code></p>
 				<p>&nbsp;&nbsp; Convert a number into its Text equivalet. Example: <code>5.toString(); // "5"</code></p>
@@ -79,7 +82,7 @@
 				<p><code>Num -- range(Num)</code></p>
 				<p>&nbsp;&nbsp; Return a list of each number including and up to the argument, beginning at the target number. Example: <code>5.range(8); // [5, 6, 7, 8]</code></p>
 				<br/>
-				<h3 id="text">Text</h3>
+				<h3 id="text">lang.Text</h3>
 				<p>needs: <code>nothing</code>.</p>
 				<p><code>Text -- join(Text[])</code></p>
 				<p>&nbsp;&nbsp; Join together the list of texts by a glue string. Example: <code>", ".join(["hey", "not cool"]); // "hey, not cool"</code></p>
@@ -106,12 +109,12 @@
 				<p><code>Num? -- indexOf(Text)</code></p>
 				<p>&nbsp;&nbsp; Return the index of the first occurence of Text. If it never occurs, return nothing. Example: <code>"Hello".indexOf("l"); // 2</code></p>
 				<br/>
-				<h3 id="bool">Bool</h3>
+				<h3 id="bool">lang.Bool</h3>
 				<p>needs: <code>nothing</code>.</p>
 				<p><code>Text -- toString()</code></p>
 				<p>&nbsp;&nbsp; Convert a Bool into its Text equivalet. Example: <code>true.toString(); // "true"</code></p>
 				<br/>
-				<h3 id="list">List{T}</h3>
+				<h3 id="list">lang.List{T}</h3>
 				<p>needs: <code>nothing</code>.</p>
 				<p>List{T} is the autoboxed form of with T[]. Due to special semantics the other autoboxed classes don't have, you should for the moment avoid using List{T} and stick with T[] instead.</p>
 				<p><code>Num -- getSize()</code></p>
@@ -137,7 +140,15 @@
 				<p><code>{R} R -- foldl(R -- fn(T, R), R acc)</code></p>
 				<p>&nbsp;&nbsp; Like foldr, but where foldr operates on elements from left to right, foldl operates right to left. <code>['hey', 'man!'].foldl({ t, acc -> return acc / t.getSize(); }, 24); // 2</code></p>
 				<br />
-				<h3 id="Map">Map{K,V}</h3>
+				<h3 id="exception">lang.Exception</h3>
+				<p>needs: <code>nothing</code>.</p>
+				<p>Exception is the base class from which all exceptions must extend. It implements a few basic methods, as well as holding the stacktrace for you.</p>
+				<p><code>Text -- getMessage()</code></p>
+				<p>You can subclass this to change the message of specific exceptions.</p>
+				<p><code>Text -- getStacktrace()</code></p>
+				<p>You should not subclass this method.</p>
+				<br />
+				<h3 id="Map">std.Map{K,V}</h3>
 				<p>needs: <code>nothing</code>.</p>
 				<p>Map variables of type K to variables of type V. Bad performance at the moment.</code>
 				<p><code>put(K, V)</code></p>
@@ -147,7 +158,7 @@
 				<p><code>K[] -- getKeys()</code></p>
 				<p>&nbsp;&nbsp; Get all the defined keys in a map. Example: <code>var Text[] names = Map.getKeys();</code></p>
 				<br />
-				<h3 id="Printer">Printer</h3>
+				<h3 id="Printer">io.Printer</h3>
 				<p>needs: <code>nothing</code>.</p>
 				<p><code>print(Text)</code></p>
 				<p>&nbsp;&nbsp; Print the text and no newline afterwards. Example: <code>Printer.print("hello");</code></p>
@@ -158,7 +169,7 @@
 				<p><code>printLine(Num)</code></p>
 				<p>&nbsp;&nbsp; Print the number and a newline afterwards. Example: <code>Printer.printLine(5);</code></p>
 				<br />
-				<h3 id="FileSystem">FileSystem</h3>
+				<h3 id="FileSystem">io.FileSystem</h3>
 				<p><code>FilePath -- getPath(Text)</code></p>
 				<p>&nbsp;&nbsp; Get the object representation of a path in the filesystem. Example: <code>var FilePath = FileSystem.getPath("/usr/local/bin")</code></p>
 				<p><code>FilePath[] -- listRoots()</code></p>
@@ -192,8 +203,8 @@
 				<p><code>delete()</code></p>
 				<p>&nbsp;&nbsp; Delete any folder or file that exists at this location. Example: <code>FileSystem.path("docs/File.txt").delete();</code></p>
 				<br />
-				<h3 id="File">File</h3>
-				<p>needs: <code>FilePath</code>.</p>
+				<h3 id="File">io.File</h3>
+				<p>needs: <code>io.FilePath</code>.</p>
 				<p><code>FilePath -- getPath()</code></p>
 				<p>&nbsp;&nbsp; Get the object representation of the path to this file. Example: <code>File.getPath().getBasename();</code></p>
 				<p><code>Text -- read(Num)</code></p>
@@ -211,16 +222,22 @@
 				<p><code>Bool -- eof()</code></p>
 				<p>&nbsp;&nbsp; Check if the cursor position is at the end of the file. </p>
 				<br />
-				<h3 id="Argv">Argv</h3>
+				<h3 id="Argv">std.Argv</h3>
 				<p>needs: <code>nothing</code>.</p>
 				<p><code>Text[] -- getArgv()</code></p>
 				<p>&nbsp;&nbsp; Get the arguments supplied to running the executable. Will likely be renamed or maybe encapsulated elsewhere. Example: <code>needs Argv, Printer then { Printer.print(Argv.getArgv()[0]); }</code></p>
 				<br />
-				<h3 id="System">System</h3>
+				<h3 id="System">std.System</h3>
 				<p>needs: <code>nothing</code>.</p>
 				<p><code>exit(Num)</code></p>
 				<p>&nbsp;&nbsp; Exit program with a return code. By convention, a non-zero exit value is considered an error. Example: <code>System.exit(0);</code></p>
 				<br />
+				<h3 id="undefinedindexexception">std.UndefindIndexException</h3>
+				<p>a <code>std.Exception</code>.</p>
+				<p>needs: <code>nothing</code>.</p>
+				<p>Exceptions thrown from unsafe array accesses throw an instance of this class. It is mostly a standard exception, but it has one extra public field you can use in your code.</p>
+				<p><code>with public Num index;</code></p>
+				<p>You can code against this exact missing index with this public property.</p>
 				</div>
 			</div>
 

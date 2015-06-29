@@ -76,7 +76,7 @@ if($code) {
 		<div class="row">
 			<div class="span12">
 				<textarea style="width:100%; height:300px; font-family: monospace" name="Code"><?php if($code): echo $code; else: ?>
-import Printer;
+import io.Printer;
 
 every Main is:
 

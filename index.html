@@ -43,6 +43,7 @@
 				<li><a href="#new">New ideas in Wake</a></li>
 				<li><a href="#removals">What we removed</a></li>
 				<li><a href="#trywake">Try Wake online</a></li>
+				<li><a href="#ifwhilefor">If, while, and for</a></li>
 				<li><a href="#variables">Variables</a></li>
 				<li><a href="#typevariables">- Types as Variables</a></li>
 				<li><a href="#aliases">- Aliased Variables</a></li>
@@ -365,6 +366,22 @@
 
 			<hr />
 
+			<h1 id="ifwhilefor"><code>if</code>, <code>while</code>, and <code>for</code> constructs <span class="label label-inverse">concise</span> <span class="label label-inverse">readable</span></h1>
+			<div class="alert alert-success">New to 0.2.1! If you are using the 0.2.0 compiler, parenthesis are required.</div>
+			<p>Wake's syntax does not require parenthesis around the conditions of if statements or while statements. For loops still require parens but are still considered to be in flux. In loops, <code>continue</code> and <code>break</code> are both supported.</p>
+			<p>Note that there is currently no <code>switch/case</code> support, and that there are two other important constructs in Wake you'll need to know which aren't covered here: <a href="#optionals">exists statements</a> and <a href="#iterating">foreach loops</a>.</p>
+			<hr />
+					<span class="label label-info">Wake</span>
+					<pre><code class="wake"
+>if <span class="goodcode" title="Conditions can be any boolean expression">i &lt; 3 </span> <span class="goodcode" title="The body of your if statement should usually be surrounded in curly braces">{ ... }</span>
+else { ... }
+if <span class="goodcode" title="Conditions can be any boolean expression">i &lt; 5 </span> <span class="goodcode" title="If you do not want to use curly braces around your if statement's body, use the keyword 'then'">then</span> return true;
+else <span class="goodcode" title="The then keyword is not required and should not be used after an else statement">return false;</span>
+
+while <span class="goodcode" title="Conditions can be any boolean expression">i &lt; 3 </span> <span class="goodcode" title="The body of your while statement should usually be surrounded in curly braces">{ ... }</span>
+while <span class="goodcode" title="Conditions can be any boolean expression">i &lt; 6 </span> <span class="goodcode" title="Alternatively, to not use curly braces around your while body, you can use the keyword 'do'">do</span> ...;</code></pre>
+				</div>
+
 			<h1 id="variables">Making The Most Of Wake Variables</h1>
 			<div class="alert alert-success">Variables in Wake come in three forms, all with the goal of meaningful names in minimal keystrokes.</div>
 			<h3 id="typevariables">1. Typenames as variables <span class="label label-inverse">concise</span> <span class="label label-inverse">readable</span></h3>
@@ -456,7 +473,7 @@
     needs Num;
 
     Num -- setToNotGreaterThan(<span class="goodcode" title="Here, all we really care about is that Num and $Num are different variables; we don't force you to come up with a unique name.">$Num</span>) {
-        if(Num &gt; <span class="goodcode" title="While this can be confusing, this is a usage of $Num the argument rather than Num the property. We let you decide when its appropriate, such as short statements and algorithms.">$Num</span>) Num = $Num;
+        if Num &gt; <span class="goodcode" title="While this can be confusing, this is a usage of $Num the argument rather than Num the property. We let you decide when its appropriate, such as short statements and algorithms.">$Num</span> then Num = $Num;
     }</code></pre>
 			<h3 id="declarations">Declaring variables <span class="label label-inverse">concise</span> <span class="label label-inverse">safe</span></h3>
 			<p>All these variable names are usable in declarations when preceded with <code>:</code>, or when in properties</p>
@@ -528,25 +545,30 @@
 			<hr />
 
 			<h3 id="iterating">Iterating over Lists <span class="label label-inverse">concise</span> <span class="label label-inverse">readable</span></h3>
+			<div class="alert alert-warning">This feature is new to v0.2.1. If you are using a prior version, parenthesis around your iteration value are required, and the <code>do</code> keyword should not be used.</div>
 			<p>Since Wake blurs the line between variables and types, we can boast the smallest foreach loop of any language.</p>
 			<span class="label label-info">Wake</span>
 			<pre><code class="wake"
 >every PersonDatabase is:
 
     delete(Person[]) {
-        foreach(<span class="goodcode" title="The compiler reduces Person[] to Person, and performs the following code for each person in our list.">Person[]</span>) Person.delete();
+        foreach <span class="goodcode" title="The compiler reduces Person[] to Person, and performs the following code for each person in our list.">Person[]</span> <span class="goodcode" title="the 'do' keyword separates the body of the loop from the iteration value">do</span> Person.delete();
+		// or
+        foreach <span class="goodcode" title="The compiler reduces Person[] to Person, and performs the following code for each person in our list.">Person[]</span> <span class="goodcode" title="When using a curly brace block, there is no need to use the 'do' keyword">{</span>
+            Person.delete();
+        }
     }</code></pre>
-			<div class="alert alert-success">This works as you would expect for shadowed variables, where <code>$Person[]</code> becomes <code>$Person</code>. And it also works for expressions, where <code>foreach(db.getPeople())</code> lets you iterate over <code>Person</code>, since the compiler knows your db returns <code>Person[]</code>.</div>
+			<div class="alert alert-success">This works as you would expect for shadowed variables, where <code>$Person[]</code> becomes <code>$Person</code>. And it also works for expressions, where <code>foreach db.getPeople()</code> lets you iterate over <code>Person</code>, since the compiler knows your db returns <code>Person[]</code>.</div>
 			<p>Wake also supports giving custom names to the items you iterate over, and will <b>soon</b> support getting the index at the same time.</p>
 			<span class="label label-info">Wake</span>
 			<pre><code class="wake"
 >every PersonDatabase is:
 
     delete(Person[]) {
-        foreach(<span class="goodcode" title="Explicitly name the variable you're iterating over.">$Person</span> in Person[]) $Person.delete();
-        foreach(person in Person[]) person.delete();
-        foreach(Person[] <span class="goodcode" title="Sometimes its important to know the index of which Person you're iterating over.">at Num</span>) <span class="goodcode" title="Make each person greet themselves - Person and Person[Num] are equivalent.">Person.greet(Person[Num]);</span>
-        foreach(person in Person[] at Num) person.greet(Person[Num]);
+        foreach <span class="goodcode" title="Explicitly name the variable you're iterating over.">$Person</span> in Person[] do $Person.delete();
+        foreach person in Person[] do person.delete();
+        foreach Person[] <span class="goodcode" title="Sometimes its important to know the index of which Person you're iterating over.">at Num</span> do <span class="goodcode" title="Make each person greet themselves - Person and Person[Num] are equivalent.">Person.greet(Person[Num]);</span>
+        foreach person in Person[] at Num do person.greet(Person[Num]);
     }</code></pre>
 
 			<h3 id="typesafelists">Typesafe Lists <span class="label label-inverse">readable</span> <span class="label label-inverse">typesafe</span></h3>
@@ -703,7 +725,7 @@ every ModuleExample is:
     with <span class="goodcode" title="This may hold an integer, text, a class, or even yet another calculation cache. Calling code decides.">T?</span> = <span class="goodcode" title="Begin the cache as empty">nothing</span>;
     needs <span class="goodcode" title="Store the function to calculate the value">T -- fn()</span> calculation;
     <span class="goodcode" title="Here we provide the calculated value of type T.">T</span> -- getValue() {
-        if(<span class="goodcode" title="Use our type T by its typename since it was not aliased.">T</span> == nothing) {
+        if <span class="goodcode" title="Use our type T by its typename since it was not aliased.">T</span> == nothing {
             T = calculation();
         }
         return T;
@@ -836,7 +858,7 @@ every PersonProvider is:
 >every ListSorter is:
 
     sort(Num[]) {
-        Num[].each({ <span class="goodcode" title="Declare one argument to this function, Num">Num</span> <span class="goodcode" title="A dashrocket separates arguments from the closure body">-&gt;</span> <span class="goodcode" title="Here the body of the function goes. You can have any type of statement in here: if statements, return statements, etc.">if(Num == ...) { ... }</span> });
+        Num[].each({ <span class="goodcode" title="Declare one argument to this function, Num">Num</span> <span class="goodcode" title="A dashrocket separates arguments from the closure body">-&gt;</span> <span class="goodcode" title="Here the body of the function goes. You can have any type of statement in here: if statements, return statements, etc.">if Num == ... { ... }</span> });
         Num[].sort({ <span class="goodcode" title="Declare two arguments to this function, Num and $Num">Num, $Num</span> <span class="goodcode" title="An equalsrocket saves you the hassle of writing return statements manually.">=&gt;</span> <span class="goodcode" title="Since we used =>, we put an expression instead of a statement, and can skip the ending semicolon">Num &lt; $Num</span> });
     }</code></pre>
 

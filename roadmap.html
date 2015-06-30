@@ -187,21 +187,79 @@
 			<p>There are a lot af parts in Wake, and a lot of parts in JavaScript. Getting all of them to play nice on each side is starting to wrap up, but still not done yet.</p>
 			<p><b>for a more detailed and up-to-date summary go to <a href="interop-plans.html">the interop plan summary.</a></b></p>
 
+			<div class="rm-i">
+				<h4>Runtime method segment stripper (124)</h4>
+				<p>runtime function to turn complex method names into simple ones (ie, printLine(Text) to printLine), aborting on unusable symbols like "that(Bool)Equals(Bool)"</p>
+			</div>
+			<div class="rm-slant-straight"></div>
+			<div class="rm-i flagship">
+				<h4>Deminification runtime (125)</h4>
+				<p>Runtime function to loop over object properties and deminify them, store the original wake on the js, and store/reuse the js on the original wake.</p>
+			</div>
+			<div class="rm-slant-straight"></div>
+			<div class="rm-i">
+				<h4>Recursive deminification (126)</h4>
+				<p>Recurively wrap wake object properties (including functions ie methods), and use Object.setProperty() to do so, lazily.</p>
+			</div>
+			<div class="rm-slant-straight"></div>
+			<div class="rm-i">
+				<h4>Generate reminification setters (127)</h4>
+				<p>Use Object.setProperty to intercept when properties on wrappers around wake objects are being set. Unwrap the value and set it on the original Wake object.</p>
+			</div>
+			<div class="rm-slant-straight"></div>
+			<div class="rm-i">
+				<h4>Wake to JS function conversion (128)</h4>
+				<p>Handle functions sent out of wake. Unwrap wake objects on the way in, wrap return values, and save the relationship between the two for quick reversal.</p>
+			</div>
+			<div class="rm-slant-straight"></div>
+			<div class="rm-i">
+				<h4>Primitives into Wake (129)</h4>
+				<p>Handle primitives sent into wake. Detect undefineds and turn them into nulls. Otherwise, check for attached original wake objects, if none exists assume its a primitive and leave it untouched (for now).</p>
+			</div>
+			<div class="rm-slant-straight"></div>
+			<div class="rm-i">
+				<h4>Arrays in&out of Wake (130)</h4>
+				<p>Handle arrays: Arrays coming into wake are marked js arrays. Arrays sent out of wake must have all items transformed to js objects must be marked js arrays.</p>
+			</div>
+			<div class="rm-slant-straight"></div>
+			<div class="rm-i">
+				<h4>Js to Wake function conversion (131)</h4>
+				<p>Unwrap each js argument sent in, wrap the return in js, and save the relationship between the two for quick reversal.</p>
+			</div>
+
+			<div class="rm-i flagship">
+				<h4>Extern Js Wrappers (132)</h4>
+				<p>In wake-js-gen, have extern wrappers that contain secret ctor args. These wrappers should preset the 'wake original' and 'js representation' for usage in other components.</p>
+			</div>
+			<div class="rm-slant-straight"></div>
+			<div class="rm-i">
+				<h4>Create extern js wrappers automatically (133)</h4>
+				<p>Create a runtime function for ahead-of-time generation of wake/js linking on certain functions.</p>
+			</div>
+
+			<div class="rm-i flagship">
+				<h4>Ability to link as a js lib (134)</h4>
+				<p>rather than generate an injected MainClass.mainMethod(), we generate a Wake.Constructor(args) approach...need to think about which ctors to expose. All of them? And un-js the wake ctor arguments. Also need to make it usable with ecmascript6 modules and nodejs importing.</p>
+			</div>
+
+			<div class="rm-i">
+				<h4>JS Singletons + function layers (135)</h4>
+				<p>For serving plain functions to Wake and/or things which only need to be subclassed in the js world.</p>
+			</div>
+
+			<div class="rm-i">
+				<h4>jswrappers + generics (136)</h4>
+				<p>Generic classes may accept extern js wrappers as args at times, and not at other times. Need to find when and pass in ctors to the generic to make it handle these cases.</p>
+			</div>
+
+			<div class="rm-i">
+				<h4>Async/await (116)</h4>
+				<p>Add async/await support so that we can have an async library which isn't painful to use in other languages where async isn't as much of a necessity.</p>
+			</div>
+
 			<div class="clearfix">
 				<div class="rm-c rm-c1">
 					<div class="rm-spacer"></div>
-					<h3>ready to develop</h3>
-					<div class="rm-i">
-						<h4>Provision Annotations (<a href="https://github.com/MichaelRFairhurst/wake-compiler/issues/79">#79</a>)</h4>
-						<p>The ability to annotate provisions, so that you can annotate them with a javascript method name.</p>
-					</div>
-					<div class="rm-slant-right"></div>
-					<h3 class="complete">complete</h3>
-					<div class="rm-i flagship done">
-						<h4>Closure support</h4>
-						<p>Perhaps here we'll begin with only currying methods so that we can keep developing js interop. This is a broad feature with its own dependencies.</p>
-					</div>
-					<div class="rm-slant-right flagship done"></div>
 					<div class="rm-i flagship">
 						<h4>Angular support</h4>
 						<p>I would love to support angularjs well.</p>
@@ -210,18 +268,6 @@
 				</div>
 
 				<div class="rm-c rm-c2">
-					<h3>ready to develop</h3>
-					<div class="rm-i">
-						<h4>Cascade Annotations Across Inheritance (<a href="https://github.com/MichaelRFairhurst/wake-compiler/issues/80">#80</a>)</h4>
-						<p>By having annotations traverse inheritance chains, we can use <code>@JavascriptAvailable("methodName")</code> to publish wake-y APIs like providers and method overloading.</p>
-					</div>
-					<div class="rm-slant-straight"></div>
-					<div class="rm-i flagship">
-						<h4>Publish Wake classes to JS</h4>
-						<p>Use the annotation values and best guesses to create thin js wrappers that allow wake to be usable within your javascript.</p>
-						<p>Alter <code>wake-js-gen</code> to use this on all classes except extern ones which we might unwrap instead.</p>
-					</div>
-					<div class="rm-slant-straight flagship"></div>
 					<div class="rm-i flagship">
 						<h4>jQuery support</h4>
 						<p>Now with wrappers for the return value of <code>$(selector)</code> and <code>.offset()</code>, and with closures to pass into <code>.click()</code>, we can support jQuery. This will likely teach us some lessons about where we have holes in our interp support</p>
@@ -237,18 +283,6 @@
 
 				<div class="rm-c rm-c3">
 					<div class="rm-spacer"></div>
-					<h3>ready to develop</h3>
-					<div class="rm-i">
-						<h4>Property Annotations (<a href="https://github.com/MichaelRFairhurst/wake-compiler/issues/81">#81</a>)</h4>
-						<p>The ability to annotate properties, so that you can choose a name for javascript for wierd properties like <code>Text[]</code>.</p>
-					</div>
-					<div class="rm-slant-left"></div>
-					<div class="rm-i flagship">
-						<h4>Plan for Javascript Wrappers (<a href="https://github.com/MichaelRFairhurst/wake-compiler/issues/82">#82</a>)</h4>
-						<p>These are Wake layers around random objects such as the result of <code>$(selector)</code>. They must be declared in Wake to wrap the native object, and annotated with how to use it in js.</p>
-						<p>Alter <code>wake-js-gen</code> to use these to wrap return values of javascript methods.</p>
-					</div>
-					<div class="rm-slant-left flagship"></div>
 				</div>
 			</div>
 
